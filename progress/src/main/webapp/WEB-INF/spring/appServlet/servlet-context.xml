@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:sec="http://www.springframework.org/schema/security"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+    xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing 
+		infrastructure -->
+
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+	
+	<context:component-scan base-package="com.progress.web.controllers" />  
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources directory -->
+ 
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!--  Messages spring security source for new application-specific defined -->
+	<beans:bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<beans:property name="basenames">
+	    	<beans:list>
+ 				<beans:value>resources.mymessages</beans:value>	
+	    	</beans:list>
+		</beans:property>
+  	</beans:bean>
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
+		in the /WEB-INF/jsp directory -->
+<!--  		
+	<beans:bean id="viewResolverTiles" class="org.springframework.web.servlet.view.ResourceBundleViewResolver" p:basename="views" />
+-->	
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/jsp/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+
+<!--
+	<beans:bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<beans:property name="viewClass">
+			<beans:value>org.springframework.web.servlet.view.JstlView
+			</beans:value>
+		</beans:property>
+		<beans:property name="prefix">
+			<beans:value>/WEB-INF/jsp/</beans:value>
+		</beans:property>
+		<beans:property name="suffix">
+			<beans:value>.jsp</beans:value>
+		</beans:property>
+	</beans:bean>
+-->
+<!-- 
+	<beans:bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<beans:property name="mediaTypes">
+			<beans:map>
+				<beans:entry key="json" value="application/json" />
+				<beans:entry key="xml" value="text/xml" />
+				<beans:entry key="htm" value="text/html" />
+			</beans:map>
+		</beans:property>
+		<beans:property name="defaultContentType" value="text/html" />
+		<beans:property name="defaultViews">
+			<beans:list>
+				<beans:bean
+					class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+-->
+
+	<jdbc:initialize-database data-source="dataSource">
+        <jdbc:script location="classpath:resources/DB.sql"/>
+    </jdbc:initialize-database>
+
+	<!-- ========================= DATASOURCE ======================== -->
+    
+	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<beans:property name="url"
+			value="jdbc:mysql://localhost:3306/progress" />
+		<beans:property name="username" value="root" />
+		<beans:property name="password" value="progress123$" />
+	</beans:bean>
+
+	
+   <!-- ========================== HIBERNATE ============================ -->
+
+	<beans:bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<beans:property name="dataSource" ref="dataSource" />
+<!--  
+  		<beans:property name="configLocation">
+			<beans:value>WEB-INF/spring/hibernate.cfg.xml</beans:value>
+		</beans:property>
+-->  
+		<beans:property name="annotatedClasses">
+            <beans:list>
+                <beans:value>com.progress.jpa.User</beans:value>
+                <beans:value>com.progress.jpa.Authority</beans:value>
+                <beans:value>com.progress.web.controllers.WelcomeController</beans:value>
+                <beans:value>com.progress.web.controllers.LoginController</beans:value>
+            </beans:list>
+        </beans:property>
+        <beans:property name="annotatedPackages">
+	        <beans:list>
+    	        <beans:value>com.progress.services.impl.dao</beans:value>
+       		</beans:list>
+        </beans:property>
+        
+		<beans:property name="hibernateProperties">
+			<beans:value>
+				hibernate.dialect = org.hibernate.dialect.MySQLDialect
+				hibernate.show_sql = true
+				hibernate.hbm2ddl.auto = update
+			</beans:value>
+		</beans:property>
+	</beans:bean>
+	
+	<beans:bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<beans:property name="sessionFactory" ref="sessionFactory" />
+	</beans:bean>
+	
+<!-- 
+	<beans:bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer"
+		p:definitions="/WEB-INF/tiles-defs.xml" />
+
+	<beans:bean id="timeService" class="com.progress.dao.service.TimeService" />
+-->
+<!-- 
+ 	<context:component-scan base-package="com.progress" />
+-->
+ 	
+ 	<tx:annotation-driven transaction-manager="transactionManager" />
+<!--  	
+	<beans:bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+        <beans:property name="sessionFactory" ref="sessionFactory" />
+    </beans:bean>
+-->
+</beans:beans>

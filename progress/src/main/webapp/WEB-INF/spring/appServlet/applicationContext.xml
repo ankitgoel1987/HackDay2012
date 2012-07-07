@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:sec="http://www.springframework.org/schema/security"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:orm="http://www.springframework.org/schema/orm"
+    xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd 
+        http://www.springframework.org/schema/orm http://www.springframework.org/schema/aop/spring-orm-3.1.xsd 
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd 
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd 
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd 
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+    
+    
+	<!-- ========================== WEB DEFINITIONS ======================= -->
+    <!-- <context:component-scan base-package="sst"/> -->
+    <!-- <context:annotation-config /> -->
+
+ <!-- <context:component-scan base-package="com.progress.web.controller" /> -->  
+ 	
+ 	<!--  Messages spring security source for new application-specific defined -->
+ 	
+	<!-- Done in servlet-context.xml
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+	    	<list>
+				<value>resources.mymessages</value>
+				<value>messages</value>
+	    	</list>
+		</property>
+  	</bean>
+ 	 -->
+ 	<!-- The view resolver to direct to corresponding view pages(jsp). --> 
+ 	<!-- 
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean> -->
+	
+
+    <!-- ========================= DATASOURCE ======================== -->
+<!--    <bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/progress" />
+		<property name="username" value="root" />
+		<property name="password" value="office" />		
+	</bean>	
+-->
+
+   <!-- ========================== HIBERNATE ============================ -->
+<!--    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="annotatedClasses">
+            <list>
+                <value>com.progress.dao.User</value>
+                <value>com.progress.dao.Authority</value>
+            </list>
+        </property>
+        <property name="annotatedPackages">
+        <list>
+            <value>com.progress.dao.service.dao</value>
+        </list>
+        </property>
+        <property name="hibernateProperties">
+            <value>
+                hibernate.dialect=org.hibernate.dialect.MySQLDialect
+                hibernate.show_sql=true
+                hibernate.hbm2ddl.auto=update
+            </value>
+        </property>
+    </bean>
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManager" />
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+-->    
+
+    <!-- ========================= BEANS ======================== -->
+    <bean id="userDao" class="com.progress.dao.impl.UserDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <bean id="authorityDao" class="com.progress.dao.impl.AuthorityDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="userService" class="com.progress.services.impl.UserServiceImpl">
+        <property name="userDao" ref="userDao" />
+    </bean>
+    
+    <bean id="authorityService" class="com.progress.services.impl.AuthorityServiceImpl">
+        <property name="authorityDao" ref="authorityDao" />
+    </bean>
+    
+     
+    
+    <!-- ========================= SECURITY ======================== -->
+	<!-- 
+	<http auto-config="true">
+		<intercept-url pattern="/welcome*" access="ROLE_USER, ROLE_ADMIN" />
+		<form-login login-page="/login" default-target-url="/welcome" authentication-failure-url="/loginfailed" />
+		<logout logout-success-url="/logout" />
+	</http>
+	-->
+	
+    <sec:http auto-config="true">
+        <!-- <sec:intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" /> -->
+        <sec:intercept-url pattern="/admin/**" access="ROLE_ADMIN" requires-channel="https" />
+        <sec:intercept-url pattern="/member/**" access="ROLE_MEMBER,ROLE_ADMIN" requires-channel="https"/>
+        <sec:form-login login-page="/login" default-target-url="" authentication-failure-url="/loginFail"/>
+        <sec:access-denied-handler ref ="myAccessDeniedHandlerImpl"/>
+        <!-- <logout logout-success-url="/index.jsp" /> -->
+        
+        <sec:port-mappings>
+        	<sec:port-mapping http="8090" https="8443"/>
+        	<sec:port-mapping http="8080" https="8443"/>
+        </sec:port-mappings>
+    </sec:http>
+    
+    
+    <!-- Added for https  -->
+    
+    <bean id="channelProcessingFilter" class="org.springframework.security.web.access.channel.ChannelProcessingFilter">
+        <property name="channelDecisionManager">
+            <bean class="org.springframework.security.web.access.channel.ChannelDecisionManagerImpl">
+                <property name="channelProcessors">
+                    <list>
+                        <bean class="org.springframework.security.web.access.channel.SecureChannelProcessor"/>
+                        <bean class="org.springframework.security.web.access.channel.InsecureChannelProcessor"/>
+                    </list>
+                </property>
+            </bean>
+        </property>
+        <property name="securityMetadataSource">
+            <bean class="org.springframework.security.web.access.intercept.DefaultFilterInvocationSecurityMetadataSource">
+            	<constructor-arg>
+            		<bean class="org.springframework.security.web.util.AntUrlPathMatcher"/>
+                </constructor-arg>
+                <constructor-arg>
+                	<util:map map-class="java.util.LinkedHashMap">
+                        <entry>
+                            <key>
+                                <bean class="org.springframework.security.web.access.intercept.RequestKey">
+                                    <constructor-arg value="/admin/**"/>
+                                </bean>
+                            </key>
+                            <util:list>
+                        		<bean class="org.springframework.security.access.SecurityConfig">
+                            		<constructor-arg value="REQUIRES_SECURE_CHANNEL"/>
+                        		</bean>
+                    		</util:list>
+                        </entry>
+                        <entry>
+                            <key>
+                                <bean class="org.springframework.security.web.access.intercept.RequestKey">
+                                    <constructor-arg value="/**"/>
+                                </bean>
+                            </key>
+                            <util:list>
+                        		<bean class="org.springframework.security.access.SecurityConfig">
+                            		<constructor-arg value="REQUIRES_INSECURE_CHANNEL"/>
+                        		</bean>
+                    		</util:list>
+                        </entry>
+                    </util:map>                	                	
+                </constructor-arg>
+            </bean>
+    	</property>
+	</bean>
+
+    
+    <!--
+        This is a modified AccessDeniedHandler that performs a redirect instead of a forward.
+        This way, the address bar updates to the access denied page's URL.
+     -->
+     
+    <bean id="myAccessDeniedHandlerImpl" class="com.progress.security.MyAccessDeniedHandlerImpl">
+        <property name="errorPage" value="/accessDenied"/>
+    </bean>
+    
+    <sec:authentication-manager>
+    	<sec:authentication-provider user-service-ref="userDetailsServiceImpl">
+        	<sec:password-encoder hash="sha-256" />
+        </sec:authentication-provider>
+        
+    </sec:authentication-manager>
+    
+    <bean id="userDetailsServiceImpl" class="com.progress.services.impl.UserDetailsServiceImpl">
+        <constructor-arg ref="userService"/>
+    </bean>   
+    
+</beans>
