@@ -118,8 +118,8 @@
 	
     <sec:http auto-config="true">
         <!-- <sec:intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" /> -->
-        <sec:intercept-url pattern="/admin/**" access="ROLE_ADMIN" requires-channel="https" />
-        <sec:intercept-url pattern="/member/**" access="ROLE_MEMBER,ROLE_ADMIN" requires-channel="https"/>
+        <sec:intercept-url pattern="/admin/**" access="ROLE_ADMIN"/>
+        <sec:intercept-url pattern="/member/**" access="ROLE_MEMBER,ROLE_ADMIN"/>
         <sec:form-login login-page="/login" default-target-url="" authentication-failure-url="/loginFail"/>
         <sec:access-denied-handler ref ="myAccessDeniedHandlerImpl"/>
         <!-- <logout logout-success-url="/index.jsp" /> -->
