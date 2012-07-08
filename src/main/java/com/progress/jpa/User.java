@@ -4,7 +4,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +20,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 /**
  * The persistent class for the USERS database table.
  * 
+ * @author agoel
  */
 @Entity
 @Table(name = "USERS")
@@ -34,7 +43,10 @@ public class User implements Serializable, UserDetails {
 	@JoinColumn(name = "AUTHORITY_ID")
 	private Authority authority;
 
-	// Getters & Setters for original props
+	// Constructors
+	public User() {
+	}
+
 	public int getUserId() {
 		return this.userId;
 	}
@@ -115,7 +127,4 @@ public class User implements Serializable, UserDetails {
 		this.authorities = (Collection<GrantedAuthority>) listOfAuthorities;
 	}
 
-	// Constructors
-	public User() {
-	}
 }

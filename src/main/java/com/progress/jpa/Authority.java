@@ -3,11 +3,16 @@ package com.progress.jpa;
 import java.io.Serializable;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the AUTHORITIES database table.
  * 
+ * @author agoel
  */
 @Entity
 @Table(name = "AUTHORITIES")
