@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS SessionData (
         userID int(6) NOT NULL,
 		loginDateTime datetime NOT NULL,
-        ipAddress varchar(50),
+        ipAddress varchar(50)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS USERS (
