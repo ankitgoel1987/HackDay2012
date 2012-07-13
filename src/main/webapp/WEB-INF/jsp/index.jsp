@@ -104,7 +104,7 @@
 							<li class="dropdown" id="SignIn"><a class="dropdown-toggle"
 								data-toggle="dropdown" href="#"><img alt="user Pic"
 									src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-snc4/273986_669104098_85932325_q.jpg"
-									height="20px" width="20px"> <% user.getName(); %> <b class="caret"></b>
+									height="20px" width="20px"> <% out.println(user.getName()); %> <b class="caret"></b>
 							</a>
 								<ul class="dropdown-menu">
 									<li><a href="#">Account settings</a></li>
