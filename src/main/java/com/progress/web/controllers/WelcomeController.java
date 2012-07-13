@@ -33,6 +33,7 @@ public class WelcomeController {
 	@RequestMapping(value = "location", method = RequestMethod.GET)
 	public String location(ModelMap model, Principal principal) {
 		System.out.println("Welcome Controller\n");
+		model.addAttribute("principal", principal);
 		return "location";
 
 	}	
@@ -40,6 +41,7 @@ public class WelcomeController {
 	@RequestMapping(value = "/member", method = RequestMethod.GET)
 	public String memberWelcome(ModelMap model, Principal principal) {
 		System.out.println("Member welcome Controller\n");
+		model.addAttribute("principal", principal);
 		return "member/memberPage1";
 
 	}
