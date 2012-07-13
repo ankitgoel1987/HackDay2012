@@ -18,7 +18,9 @@ function initialize_map() {
 //			console.log(position);
 //			var currentLatLng = new google.maps.LatLng(
 //					position.coords.latitude, position.coords.longitude);
+	
 			var currentLatLng = new google.maps.LatLng(17.46651,78.36321659999999);
+			
 			var myOptions = {
 				center : currentLatLng,
 				zoom : 8,
@@ -34,8 +36,8 @@ function initialize_map() {
 			map = new google.maps.Map(document.getElementById("map_canvas"),
 					myOptions);
 			map.setCenter(currentLatLng);
-			console.log(currentLatLng);
-			showMarker(currentLatLng);
+//			console.log(currentLatLng);
+//			showMarker(currentLatLng);
 //		});
 //	}
 }

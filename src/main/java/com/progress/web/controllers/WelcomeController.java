@@ -22,12 +22,20 @@ public class WelcomeController {
 
 	}
 	
-	@RequestMapping(value = "", method = RequestMethod.POST)
-	public String printWelcome1(ModelMap model, Principal principal) {
+	@RequestMapping(value = "home", method = RequestMethod.GET)
+	public String showHomePage(ModelMap model, Principal principal) {
 		System.out.println("Welcome Controller\n");
+		model.addAttribute("principal", principal);
 		return "index";
 
 	}
+	
+	@RequestMapping(value = "location", method = RequestMethod.GET)
+	public String location(ModelMap model, Principal principal) {
+		System.out.println("Welcome Controller\n");
+		return "location";
+
+	}	
 
 	@RequestMapping(value = "/member", method = RequestMethod.GET)
 	public String memberWelcome(ModelMap model, Principal principal) {
