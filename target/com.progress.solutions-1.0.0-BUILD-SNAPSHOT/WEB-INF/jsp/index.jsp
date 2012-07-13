@@ -12,5 +12,8 @@
         <p><a href="admin">Go to Admin welcome page (adminPage1)</a></p>
         <p><a href="">Go to Home Page (index page)</a></p>
         <p><a href="login">Go to Login page</a></p>
+        <br/>
+        <p><a href="mailForm">Send Mail Form</a></p>
+        <p><a href="fbAuth">Click this to get Facebook Authentication</a></p>
     </body>
 </html>

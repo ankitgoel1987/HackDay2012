@@ -11,10 +11,10 @@
     	<h3>Welcome Admin</h3>
         <p>This is an admin welcome page.</p>
         
-        <p><a href="/solutions/admin/listLogin">Show all logins</a></p>
+        <p><a href="admin/listLogin">Show all logins</a></p>
         
         <p><a href='<spring:url value="/j_spring_security_logout" htmlEscape="true" />'>Logout</a></p>
-        <p><a href="/solutions/member">Go to Member Welcome page</a></p>
-		<p><a href="/solutions">Go to Home page</a></p>
+        <p><a href="member">Go to Member Welcome page</a></p>
+		<p><a href="">Go to Home page</a></p>
     </body>
 </html>

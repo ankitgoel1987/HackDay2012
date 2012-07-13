@@ -11,16 +11,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.progress.dao.interfaces.AuthorityDao;
 import com.progress.dao.interfaces.UserDao;
-import com.progress.jpa.Authority;
-import com.progress.jpa.User;
+import com.progress.jpa.Authorities;
+import com.progress.jpa.Users;
 
+/**
+ * 
+ * @author agoel
+ *
+ */
 @Repository
 public class UserDaoImpl implements UserDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	private String queryString = "from User where username = ?";
+
+	private String queryString = "from Users where username = ?";
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
@@ -28,10 +35,11 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	@Transactional
-	public User getUserByUserName(String userName) throws HibernateException {
+	public Users getUserByUserName(String userName) throws HibernateException {
 
+		
 		Session session = this.sessionFactory.getCurrentSession();
-
+//		usersHome.findById(1);
 		try {
 
 			System.out
@@ -39,14 +47,14 @@ public class UserDaoImpl implements UserDao {
 			Query query = session.createQuery(queryString);
 			query.setString(0, userName);
 
-			List<User> result = query.list();
-			if (result == null) {
+			List<Users> result = query.list();
+			if (result == null || result.size() == 0) {
 				System.out.println("No search results\n");
 				return null;
 			}
 			System.out.println(result);
 			System.out.println("sessionfactory working\n");
-			User u = result.get(0);
+			Users u = result.get(0);
 			System.out.println(u);
 			return u;
 		} catch (HibernateException ex) {
@@ -75,16 +83,16 @@ public class UserDaoImpl implements UserDao {
 			Query query = session.createQuery(queryString);
 			query.setString(0, userName);
 
-			List<User> result = query.list();
+			List<Users> result = query.list();
 			if (result == null) {
 				System.out.println("No search results\n");
 				return null;
 			}
 			System.out.println(result);
 			System.out.println("sessionfactory working\n");
-			User u = result.get(0);
-			Authority a = u.getAuthority();
-			String auth = a.getAuthorityName();
+			Users u = result.get(0);
+			Authorities a = u.getAuthority();
+			String auth = a.getAuthority();
 			List<String> l = new ArrayList<String>();
 			l.add(auth);
 			return l;
@@ -96,18 +104,18 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	@Transactional
-	public List<User> getAll() {
+	public List<Users> getAll() {
 		System.out.println("get all users details - 1\n");
 		Session session = this.sessionFactory.getCurrentSession();
 		System.out.println("get all users details\n");
-		Query query = session.createQuery("from User");
-		List<User> result = query.list();
+		Query query = session.createQuery("from users");
+		List<Users> result = query.list();
 		return result;
 	}
 
 	@Override
 	@Transactional
-	public void addLogin(User user) {
+	public void addLogin(Users user) {
 		Session session = sessionFactory.getCurrentSession();
 
 		System.out.println("Entering addLogin in daoimpl\n");

@@ -1,11 +1,20 @@
 package com.progress.services.interfaces;
+
 import java.util.List;
 
-import com.progress.jpa.User;
+import com.progress.jpa.Users;
 
+/**
+ * 
+ * @author agoel
+ * 
+ */
 public interface UserService {
-	public abstract User getUserByUserName(String userName);
+	public abstract Users getUserByUserName(String userName);
+
 	public abstract List<String> getAuthoritiesByUserName(String userName);
-    public abstract List<User> getAll();
-	public abstract void addLogin(User user);
+
+	public abstract List<Users> getAll();
+
+	public abstract void addLogin(Users user);
 }

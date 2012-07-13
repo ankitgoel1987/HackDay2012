@@ -2,16 +2,21 @@ package com.progress.dao.interfaces;
 
 import java.util.List;
 
-import com.progress.jpa.Authority;
+import com.progress.jpa.Authorities;
 
+/**
+ * 
+ * @author agoel
+ *
+ */
 public interface AuthorityDao {
 
-	public Authority getAuthorityByAuthorityId(int authorityId);
+	public Authorities getAuthorityByAuthorityId(int authorityId);
 
-	public Authority getAuthorityByAuthorityName(String authority);
+	public Authorities getAuthorityByAuthorityName(String authority);
 
-	public List<Authority> getAll();
+	public List<Authorities> getAll();
 
-	public void addAuthority(Authority authority);
+	public void addAuthority(Authorities authority);
 
 }

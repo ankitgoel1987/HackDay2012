@@ -2,14 +2,19 @@ package com.progress.dao.interfaces;
 
 import java.util.List;
 
-import com.progress.jpa.User;
+import com.progress.jpa.Users;
 
+/**
+ * 
+ * @author agoel
+ *
+ */
 public interface UserDao {
-	public User getUserByUserName(String userName);
+	public Users getUserByUserName(String userName);
 
 	public List<String> getAuthoritiesByUserName(String userName);
 
-	public List<User> getAll();
+	public List<Users> getAll();
 
-	public void addLogin(User user);
+	public void addLogin(Users user);
 }

@@ -1,11 +1,20 @@
 package com.progress.services.interfaces;
+
 import java.util.List;
 
-import com.progress.jpa.Authority;
+import com.progress.jpa.Authorities;
 
+/**
+ * 
+ * @author agoel
+ * 
+ */
 public interface AuthorityService {
-	public abstract Authority getAuthorityByAuthorityId(int authorityId);
-	public abstract Authority getAuthorityByAuthorityName(String authority);
-    public abstract List<Authority> getAll();
-	public abstract void addAuthority(Authority authority);
+	public abstract Authorities getAuthorityByAuthorityId(int authorityId);
+
+	public abstract Authorities getAuthorityByAuthorityName(String authority);
+
+	public abstract List<Authorities> getAll();
+
+	public abstract void addAuthority(Authorities authority);
 }

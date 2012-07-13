@@ -1,7 +1,7 @@
 package com.progress.services.impl;
 
 import com.progress.dao.interfaces.UserDao;
-import com.progress.jpa.User;
+import com.progress.jpa.Users;
 import com.progress.services.interfaces.UserService;
 
 import java.util.List;
@@ -9,6 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * 
+ * @author agoel
+ *
+ */
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -17,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public User getUserByUserName(String userName) {
+	public Users getUserByUserName(String userName) {
 		return userDao.getUserByUserName(userName);
 	}
 
@@ -37,14 +42,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public List<User> getAll() {
+	public List<Users> getAll() {
 		System.out.println("check number 1\n");
 		return userDao.getAll();
 	}
 
 	@Override
 	@Transactional
-	public void addLogin(User user) {
+	public void addLogin(Users user) {
 		userDao.addLogin(user);
 		return;
 	}

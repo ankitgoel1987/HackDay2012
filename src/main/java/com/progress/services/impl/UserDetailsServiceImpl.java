@@ -1,6 +1,6 @@
 package com.progress.services.impl;
 
-import com.progress.jpa.User;
+import com.progress.jpa.Users;
 import com.progress.services.interfaces.UserService;
 
 import java.util.List;
@@ -9,6 +9,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+/**
+ * 
+ * @author agoel
+ *
+ */
 public class UserDetailsServiceImpl implements UserDetailsService {
 	private UserService userService;
 
@@ -18,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	public UserDetails loadUserByUsername(String userName)
 			throws UsernameNotFoundException, DataAccessException {
-		User user;
+		Users user;
 		try {
 			user = userService.getUserByUserName(userName);
 		} catch (Exception e) {

@@ -1,15 +1,20 @@
 package com.progress.services.impl;
 
-import com.progress.dao.interfaces.AuthorityDao;
-import com.progress.dao.interfaces.UserDao;
-import com.progress.jpa.Authority;
-import com.progress.services.interfaces.AuthorityService;
-
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.progress.dao.interfaces.AuthorityDao;
+import com.progress.jpa.Authorities;
+import com.progress.services.interfaces.AuthorityService;
+
+/**
+ * 
+ * @author agoel
+ *
+ */
 @Service
 public class AuthorityServiceImpl implements AuthorityService {
 
@@ -18,21 +23,21 @@ public class AuthorityServiceImpl implements AuthorityService {
 
 	@Override
 	@Transactional
-	public Authority getAuthorityByAuthorityId(int authorityId) {
+	public Authorities getAuthorityByAuthorityId(int authorityId) {
 		// TODO Auto-generated method stub
 		return authorityDao.getAuthorityByAuthorityId(authorityId);
 	}
 
 	@Override
 	@Transactional
-	public Authority getAuthorityByAuthorityName(String authority) {
+	public Authorities getAuthorityByAuthorityName(String authority) {
 		// TODO Auto-generated method stub
 		return authorityDao.getAuthorityByAuthorityName(authority);
 	}
 
 	@Override
 	@Transactional
-	public void addAuthority(Authority authority) {
+	public void addAuthority(Authorities authority) {
 		authorityDao.addAuthority(authority);
 		// TODO Auto-generated method stub
 
@@ -40,7 +45,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 
 	@Override
 	@Transactional
-	public List<Authority> getAll() {
+	public List<Authorities> getAll() {
 		// TODO Auto-generated method stub
 		return authorityDao.getAll();
 	}

@@ -10,11 +10,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.progress.jpa.Authority;
-import com.progress.jpa.User;
+import com.progress.jpa.Authorities;
+import com.progress.jpa.Users;
 import com.progress.services.interfaces.AuthorityService;
 import com.progress.services.interfaces.UserService;
 
+/**
+ * 
+ * @author agoel
+ *
+ */
 @Controller
 public class LoginController {
 
@@ -63,7 +68,7 @@ public class LoginController {
 		System.out.println("Received request to show all schools");
 
 		// Retrieve all users by delegating the call to UserService
-		List<User> user = this.userService.getAll();
+		List<Users> user = this.userService.getAll();
 
 		System.out.println("Received request carried out + " + user);
 
@@ -84,8 +89,8 @@ public class LoginController {
 		System.out.println("Show Add form\n");
 		// Create new Login and add to model
 		// This is the formBackingOBject
-		List<Authority> authorities = this.authorityService.getAll();
-		model.addAttribute("userAttribute", new User());
+		List<Authorities> authorities = this.authorityService.getAll();
+		model.addAttribute("userAttribute", new Users());
 
 		model.addAttribute("authorities", authorities);
 
@@ -94,13 +99,13 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/admin/addLogin", method = RequestMethod.POST)
-	public String add(@ModelAttribute("userAttribute") User user, Model model) {
+	public String add(@ModelAttribute("userAttribute") Users user, Model model) {
 		ShaPasswordEncoder encoder = new ShaPasswordEncoder(256);
 		user.setPassword(encoder.encodePassword(user.getPassword(), null));
 		System.out.println(user.getUsername() + " "
 				+ encoder.encodePassword(user.getPassword(), null) + " "
 				+ user.getEnabled() + " "
-				+ user.getAuthority().getAuthorityName());
+				+ user.getAuthority().getAuthority());
 
 		userService.addLogin(user);
 		// This will resolve to /WEB-INF/jsp/addedSchoolPage.jsp

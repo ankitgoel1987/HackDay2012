@@ -95,7 +95,7 @@
 		destroy-method="close">
 		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<beans:property name="url"
-			value="jdbc:mysql://localhost:3306/progress" />
+			value="jdbc:mysql://localhost:3306/poiso7" />
 		<beans:property name="username" value="root" />
 		<beans:property name="password" value="progress123$" />
 	</beans:bean>
@@ -113,15 +113,18 @@
 -->  
 		<beans:property name="annotatedClasses">
             <beans:list>
-                <beans:value>com.progress.jpa.User</beans:value>
-                <beans:value>com.progress.jpa.Authority</beans:value>
+            <beans:value>com.progress.jpa.Users</beans:value>
+            <beans:value>com.progress.jpa.Authorities</beans:value>
+            <beans:value>com.progress.jpa.Reservationdetails</beans:value>
+            <beans:value>com.progress.jpa.Capacity</beans:value>
+            <beans:value>com.progress.jpa.Golfcourse</beans:value>
                 <beans:value>com.progress.web.controllers.WelcomeController</beans:value>
                 <beans:value>com.progress.web.controllers.LoginController</beans:value>
             </beans:list>
         </beans:property>
         <beans:property name="annotatedPackages">
 	        <beans:list>
-    	        <beans:value>com.progress.services.impl.dao</beans:value>
+    	        <beans:value>com.progress.services.dao.impl</beans:value>
        		</beans:list>
         </beans:property>
         
@@ -132,6 +135,21 @@
 				hibernate.hbm2ddl.auto = update
 			</beans:value>
 		</beans:property>
+	</beans:bean>
+	
+		<!-- ========================= BEANS ======================== -->
+	<beans:bean id="userDao" class="com.progress.dao.impl.UserDaoImpl">
+		<beans:property name="sessionFactory" ref="sessionFactory" />
+	</beans:bean>
+	<beans:bean id="authorityDao" class="com.progress.dao.impl.AuthorityDaoImpl">
+		<beans:property name="sessionFactory" ref="sessionFactory" />
+	</beans:bean>
+	<beans:bean id="userService" class="com.progress.services.impl.UserServiceImpl">
+		<beans:property name="userDao" ref="userDao" />
+	</beans:bean>
+
+	<beans:bean id="authorityService" class="com.progress.services.impl.AuthorityServiceImpl">
+		<beans:property name="authorityDao" ref="authorityDao" />
 	</beans:bean>
 	
 	<beans:bean id="transactionManager"
