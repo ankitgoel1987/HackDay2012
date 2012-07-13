@@ -30,6 +30,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			throw new UsernameNotFoundException(
 					"getUserByUserName returned null.");
 		}
+		if(user == null) {
+			throw new UsernameNotFoundException("Invalid user name");
+		}
 		List<String> authorities = userService
 				.getAuthoritiesByUserName(userName);
 		user.setUserAuthorities(authorities);

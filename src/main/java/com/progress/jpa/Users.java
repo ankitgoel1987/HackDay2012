@@ -39,7 +39,7 @@ public class Users implements java.io.Serializable, UserDetails {
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "userID", unique = true, nullable = false)
 	private Integer userId;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name = "golfCourseID")
 	private Golfcourse golfcourse;
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -57,7 +57,7 @@ public class Users implements java.io.Serializable, UserDetails {
 	private String phoneNumber;
 	@Column(name = "enabled", length = 50)
 	private String enabled;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
+	@OneToMany(mappedBy = "users")
 	private Set<Reservationdetails> reservationdetailses = new HashSet(0);
 
 	public Users() {

@@ -3,6 +3,7 @@ package com.progress.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -11,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.progress.dao.interfaces.AuthorityDao;
 import com.progress.dao.interfaces.UserDao;
 import com.progress.jpa.Authorities;
 import com.progress.jpa.Users;
@@ -55,6 +55,7 @@ public class UserDaoImpl implements UserDao {
 			System.out.println(result);
 			System.out.println("sessionfactory working\n");
 			Users u = result.get(0);
+			Hibernate.initialize(u.getAuthority());
 			System.out.println(u);
 			return u;
 		} catch (HibernateException ex) {
@@ -84,7 +85,7 @@ public class UserDaoImpl implements UserDao {
 			query.setString(0, userName);
 
 			List<Users> result = query.list();
-			if (result == null) {
+			if (result == null || result.size()==0) {
 				System.out.println("No search results\n");
 				return null;
 			}

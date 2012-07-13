@@ -17,6 +17,14 @@ public class WelcomeController {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String printWelcome(ModelMap model, Principal principal) {
 		System.out.println("Welcome Controller\n");
+		model.addAttribute("principal", principal);
+		return "index";
+
+	}
+	
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public String printWelcome1(ModelMap model, Principal principal) {
+		System.out.println("Welcome Controller\n");
 		return "index";
 
 	}
