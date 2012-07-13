@@ -1,5 +1,8 @@
 package com.progress.web.controllers;
 
+import java.util.Calendar;
+import java.util.Locale;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -7,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 
+import com.progress.jpa.BookingBean;
 import com.progress.jpa.ComposeMail;
+import com.progress.services.impl.MailServiceImpl;
+import com.progress.services.interfaces.MailService;
 import com.progress.services.mail.BasicAuthBasedRestTemplate;
 
 /**
@@ -43,6 +49,56 @@ public class MailController {
 		rest.postForLocation(MAILGUN_MAIL_SEND_REST_URI, mailData.getAsValueMap());
 		System.out.println("done mail successfully...");
 		return "mail/success";
+	}
+
+	/**
+	 * This is a dummy call to actually call the service method
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "confirmReg", method = RequestMethod.GET)
+	public String confirmRegistration() {
+		System.out.println("Dummy Confirm Registration...");
+		// Create a dummy ComposeMail POJO
+		ComposeMail composedMail = new ComposeMail("Kiran", "kiranbabu.neela@gmail.com");
+		// Call the mail service to shoot a mail
+		MailService mailService = new MailServiceImpl();
+		mailService.confirmRegistration(composedMail);
+		return "home";
+	}
+
+	/**
+	 * This is a dummy call to actually call the service method
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "confirmBooking", method = RequestMethod.GET)
+	public String confirmBooking(){
+		System.out.println("Dummy Confirm Booking...");
+		// Create a dummy BookingBean POJO
+		Calendar instance = java.util.Calendar.getInstance(new Locale(System.getProperty("user.language")));
+		BookingBean bookingData = new BookingBean(instance, "Kiran", "kiranbabu.neela@gmail.com", "34557652535645");
+		// Call the mail service to shoot a mail
+		MailService mailService = new MailServiceImpl();
+		mailService.confirmBooking(bookingData);
+		return "home";
+	}
+	
+	/**
+	 * This is a dummy call to actually call the service method
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "sendReminder", method = RequestMethod.GET)
+	public String sendReminder(){
+		System.out.println("Dummy Send Reminder...");
+		// Create a dummy BookingBean POJO
+		Calendar instance = java.util.Calendar.getInstance(new Locale(System.getProperty("user.language")));
+		BookingBean bookingData = new BookingBean(instance, "Kiran", "kiranbabu.neela@gmail.com", "34557652535645");
+		// Call the mail service to shoot a mail
+		MailService mailService = new MailServiceImpl();
+		mailService.scheduleReminderMail(bookingData);
+		return "home";
 	}
 
 }

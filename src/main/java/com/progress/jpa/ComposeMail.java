@@ -15,8 +15,15 @@ public class ComposeMail {
 	private String to;
 	private String subject;
 	private String body;
+	private String userName;
 
 	public ComposeMail() {
+	}
+
+	// Minimal
+	public ComposeMail(String userName, String toEmail) {
+		this.userName = userName;
+		this.to = toEmail;
 	}
 
 	public ComposeMail(String from, String to, String subject, String body) {
@@ -32,7 +39,7 @@ public class ComposeMail {
 		vars.add("from", getFrom());
 		vars.add("to", getTo());
 		vars.add("subject", getSubject());
-		vars.add("text", getBody());
+		vars.add("html", getBody());
 		return vars;
 	}
 
@@ -66,6 +73,14 @@ public class ComposeMail {
 
 	public void setBody(String body) {
 		this.body = body;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }
