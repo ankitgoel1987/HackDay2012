@@ -3,6 +3,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@page import="json.parse.hourlydata.*"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="com.progress.jpa.HourlyData"%>
 
 
 
@@ -67,20 +68,18 @@
 
 			<%
 				//TODO:The current date will come from javascript
-				ArrayList alist = WeatherAPI_New.get12HourList("14", "7", "2012");
-			
+				ArrayList<HourlyData> alist = (ArrayList<HourlyData>) request.getAttribute("hourlyDataList");
 				for (int i = 0; i < alist.size(); i++) {
-					MyHourlyData data = (MyHourlyData) alist.get(i);
-					int hour1 = data.getDate().getHours();
-					int hour2 = hour1 + 1;
+					HourlyData data = (HourlyData) alist.get(i);
+					String timeRange = data.getTimeRange();
 					String condition = data.getCondition();
-					String temp = data.getTemp().getValue();
+					String temp = data.getTemperature();
 					String icon_url = data.getIconUrl();
 					String humidity = data.getHumidity();
 			%>
 
 			<tr>
-				<td><%=hour1%> - <%=hour2%> AM</td>
+				<td><%=timeRange%> AM</td>
 				<td>
 					<div style="width: 145px;">
 						<div style="float: left; vertical-align: middle;">

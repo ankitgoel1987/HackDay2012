@@ -8,10 +8,11 @@ import java.util.Date;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.progress.jpa.HourlyData;
 
 
 public class JsonParser {
-	public static void main(String[] args) throws JsonParseException,
+	/*public static void main(String[] args) throws JsonParseException,
 			JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
 
@@ -29,13 +30,10 @@ public class JsonParser {
 			MyHourlyData myforecast = new MyHourlyData();
 			myforecast.setHumidity(forecast.getHumidity());
 			myforecast.setIconUrl(forecast.getIcon_url());
-			Temperature t = new Temperature();
-			t.setValue(forecast.getTemp().getEnglish());
-			t.setUnit("F");
-			myforecast.setTemp(t);
+			myforecast.setTemperature(forecast.getTemp().getEnglish());
 			myforecast.setCondition(forecast.getCondition());
 			System.out.println(forecast.getFcttime().getYear());
-			myforecast.setDate(new Date(new Integer(forecast.getFcttime()
+			myforecast.setDateTime(new Date(new Integer(forecast.getFcttime()
 					.getYear()), new Integer(forecast.getFcttime().getMon()),
 					new Integer(forecast.getFcttime().getMday()), new Integer(
 							forecast.getFcttime().getHour()), new Integer(
@@ -49,29 +47,21 @@ public class JsonParser {
 		// Condition
 		System.out.println(alist);
 	}
-
+*/
 	public  void parseFeed(String args) throws JsonParseException,
 			JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
 
 		WeatherHourlyData weather = mapper.readValue(args, WeatherHourlyData.class);
-		ArrayList<MyHourlyData> alist = new ArrayList<MyHourlyData>();
+		ArrayList<HourlyData> alist = new ArrayList<HourlyData>();
 		for (int i = 0; i < weather.getHourly_forecast().length; i++) {
 			Hourly_forecast forecast = weather.getHourly_forecast()[i];
-			MyHourlyData myforecast = new MyHourlyData();
+			HourlyData myforecast = new HourlyData();
 			myforecast.setHumidity(forecast.getHumidity());
 			myforecast.setIconUrl(forecast.getIcon_url());
-			Temperature t = new Temperature();
-			t.setValue(forecast.getTemp().getEnglish());
-			t.setUnit("F");
-			myforecast.setTemp(t);
+			myforecast.setTemperature(forecast.getTemp().getEnglish());
 			myforecast.setCondition(forecast.getCondition());
 			System.out.println(forecast.getFcttime().getYear());
-			myforecast.setDate(new Date(new Integer(forecast.getFcttime()
-					.getYear()), new Integer(forecast.getFcttime().getMon()),
-					new Integer(forecast.getFcttime().getMday()), new Integer(
-							forecast.getFcttime().getHour()), new Integer(
-							forecast.getFcttime().getMin())));
 			alist.add(myforecast);
 		}
 		// Humidity

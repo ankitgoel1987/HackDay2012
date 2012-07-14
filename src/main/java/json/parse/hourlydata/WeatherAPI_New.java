@@ -20,6 +20,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.progress.jpa.HourlyData;
 
 public class WeatherAPI_New {
 	// TODO : this will be populated by the user
@@ -31,16 +32,20 @@ public class WeatherAPI_New {
 
 	static String URL_STRING = "http://api.wunderground.com/api/" + KEY + "/"
 			+ FEATURE + "/q/" + QUERY + "." + FORMAT;
-	static ArrayList<MyHourlyData> alist = new ArrayList<MyHourlyData>();
-	static TreeMap<Long, MyHourlyData> epochmap = new TreeMap<Long, MyHourlyData>();
-	static TreeMap<String, ArrayList<MyHourlyData>> datemap = new TreeMap<String, ArrayList<MyHourlyData>>();
+	static ArrayList<HourlyData> alist = new ArrayList<HourlyData>();
+	static TreeMap<Long, HourlyData> epochmap = new TreeMap<Long, HourlyData>();
+	static TreeMap<String, ArrayList<HourlyData>> datemap = new TreeMap<String, ArrayList<HourlyData>>();
 
-	public static ArrayList<MyHourlyData> get12HourList(String dd, String mm,
-			String yyyy) throws Exception {
+	private static ArrayList<HourlyData> get12HourList(String dd, String mm,String yyyy) throws Exception {
 		initialize();
 		System.out.println("DATE MAP:");
-		ArrayList<MyHourlyData> alist = datemap.get(dd + "-" + mm + "-" + yyyy);
+		ArrayList<HourlyData> alist = datemap.get(dd + "-" + mm + "-" + yyyy);
 		return datemap.get(dd + "-" + mm + "-" + yyyy);
+	}
+	
+	public static TreeMap<String, ArrayList<HourlyData>> get10daysHourList() throws Exception {
+		initialize();
+		return datemap;
 	}
 
 	public static void initialize() throws Exception {
@@ -83,51 +88,43 @@ public class WeatherAPI_New {
 
 		for (int i = 1; i <= 11; i++) {
 			String key = currday + "-" + currmonth + "-" + curryear;
-			datemap.put(key, new ArrayList<MyHourlyData>());
+			datemap.put(key, new ArrayList<HourlyData>());
 			now.add(Calendar.DATE, 1);
 			currmonth = now.get(Calendar.MONTH) + 1;
 			currday = now.get(Calendar.DATE);
 			curryear = now.get(Calendar.YEAR);
 		}
-		System.out.println("DATEMAP:");
-		System.out.println(datemap);
 		
 		for (int i = 0; i < 240; i = i + 1) {
-			ArrayList<MyHourlyData> daywiseList = new ArrayList<MyHourlyData>();
+			ArrayList<HourlyData> daywiseList = new ArrayList<HourlyData>();
 			Date d = null;
 			Hourly_forecast forecast = weather.getHourly_forecast()[i];
-			Temperature t = new Temperature();
-			t.setValue(forecast.getTemp().getEnglish());
-			t.setUnit("F");
+			
 			d = new Date(new Integer(forecast.getFcttime().getYear()),
 					new Integer(forecast.getFcttime().getMon()), new Integer(
 							forecast.getFcttime().getMday()), new Integer(
 							forecast.getFcttime().getHour()), new Integer(
 							forecast.getFcttime().getMin()));
+			
 			if (d.getHours() >= 6 && d.getHours() < 19) {
-				MyHourlyData myforecast = new MyHourlyData();
-				myforecast.setTemp(t);
+				HourlyData myforecast = new HourlyData();
+				myforecast.setTemperature(forecast.getTemp().getEnglish());
 				myforecast.setCondition(forecast.getCondition());
-				myforecast.setDate(d);
+				myforecast.setDate(d.getDate()+"-"+d.getMonth()+"-"+d.getYear());
+				myforecast.setTimeRange(d.getHours()+"-"+(d.getHours()+1));
 				myforecast.setHumidity(forecast.getHumidity());
 				myforecast.setIconUrl(forecast.getIcon_url());
 				alist.add(myforecast);
 				epochmap.put(d.getTime(), myforecast);
+				daywiseList.add(myforecast);
+				
 				String key = d.getDate() + "-" + d.getMonth()+"-"+d.getYear();
-				System.out.println(key);
-				ArrayList<MyHourlyData> alist1 = datemap.get(key);
-				System.out.println(key+"  "+alist1);
+				ArrayList<HourlyData> alist1 = datemap.get(key);
 				if(alist1!=null)
 					alist1.add(myforecast);
 			}
 		}
-		Iterator<String> it=datemap.keySet().iterator();
-		HourComparator hc=new HourComparator();
-		while(it.hasNext()) {
-			String key=it.next();
-			ArrayList<MyHourlyData> alist=datemap.get(key);
-			Collections.sort(alist,hc);
-		}
+		
 		
 	}
 	

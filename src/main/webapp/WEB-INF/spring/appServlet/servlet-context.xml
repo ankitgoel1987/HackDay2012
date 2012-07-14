@@ -124,6 +124,9 @@
 		class="com.progress.dao.impl.ReservationDetailsDaoImpl">
 		<beans:property name="sessionFactory" ref="sessionFactory" />
 	</beans:bean>
+	<beans:bean id="hourlyDataDao" class="com.progress.dao.impl.HourlyDataDaoImpl">
+		<beans:property name="sessionFactory" ref="sessionFactory" />
+	</beans:bean>
 
 	<beans:bean id="userService" class="com.progress.services.impl.UserServiceImpl">
 		<beans:property name="userDao" ref="userDao" />
@@ -135,6 +138,10 @@
 	<beans:bean id="bookingServiceImpl"
 		class="com.progress.services.impl.BookingServiceImpl">
 		<beans:property name="reservationDetailsDao" ref="reservationDetailsDao" />
+	</beans:bean>
+	<beans:bean id="weatherServiceImpl"
+		class="com.progress.services.impl.WeatherServiceImpl">
+		<beans:property name="hourlyDataDao" ref="hourlyDataDao" />
 	</beans:bean>
 
 	<beans:bean id="transactionManager"

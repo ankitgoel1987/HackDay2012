@@ -16,13 +16,14 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.progress.jpa.HourlyData;
 
-class HourComparator implements Comparator<MyHourlyData> {
-	@Override
-	public int compare(MyHourlyData o1, MyHourlyData o2) {
-		return o1.getDate().getHours() - o2.getDate().getHours();
-	}
-}
+//class HourComparator implements Comparator<MyHourlyData> {
+//	@Override
+//	public int compare(MyHourlyData o1, MyHourlyData o2) {
+//		return o1.getDateTime().getHours() - o2.getDateTime().getHours();
+//	}
+//}
 
 public class WeatherAPI {
 	// TODO : this will be populated by the user
@@ -34,16 +35,16 @@ public class WeatherAPI {
 
 	static String URL_STRING = "http://api.wunderground.com/api/" + KEY + "/"
 			+ FEATURE + "/q/" + QUERY + "." + FORMAT;
-	static ArrayList<MyHourlyData> alist = new ArrayList<MyHourlyData>();
-	static TreeMap<Long, MyHourlyData> epochmap = new TreeMap<Long, MyHourlyData>();
-	static TreeMap<String, ArrayList<MyHourlyData>> datemap = new TreeMap<String, ArrayList<MyHourlyData>>();
+	static ArrayList<HourlyData> alist = new ArrayList<HourlyData>();
+	static TreeMap<Long, HourlyData> epochmap = new TreeMap<Long, HourlyData>();
+	static TreeMap<String, ArrayList<HourlyData>> datemap = new TreeMap<String, ArrayList<HourlyData>>();
 
-	public static ArrayList<MyHourlyData> get12HourList(String dd, String mm,
+	public static ArrayList<HourlyData> get12HourList(String dd, String mm,
 			String yyyy) throws Exception {
 		initialize();
 		System.out.println("DATE MAP:");
 		//System.out.println(datemap);
-		ArrayList<MyHourlyData> alist = datemap.get(dd + "-" + mm + "-" + yyyy);
+		ArrayList<HourlyData> alist = datemap.get(dd + "-" + mm + "-" + yyyy);
 		return datemap.get(dd + "-" + mm + "-" + yyyy);
 	}
 
@@ -78,24 +79,24 @@ public class WeatherAPI {
 		int pos = 0;
 
 		for (int i = 0; i < 10; i = i + 1) {
-			ArrayList<MyHourlyData> daywiseList = new ArrayList<MyHourlyData>();
+			ArrayList<HourlyData> daywiseList = new ArrayList<HourlyData>();
 			Date d = null;
 			for (int j = 0; j < 24; j++) {
 				Hourly_forecast forecast = weather.getHourly_forecast()[pos++];
-				Temperature t = new Temperature();
-				t.setValue(forecast.getTemp().getEnglish());
-				t.setUnit("F");
+				
 				
 				d = new Date(new Integer(forecast.getFcttime().getYear()),
 						new Integer(forecast.getFcttime().getMon()),
 						new Integer(forecast.getFcttime().getMday()),
 						new Integer(forecast.getFcttime().getHour()),
 						new Integer(forecast.getFcttime().getMin()));
+				
 				if (d.getHours() >= 6 && d.getHours() < 19) {
-					MyHourlyData myforecast = new MyHourlyData();
-					myforecast.setTemp(t);
+					HourlyData myforecast = new HourlyData();
+					myforecast.setTemperature(forecast.getTemp().getEnglish());
 					myforecast.setCondition(forecast.getCondition());
-					myforecast.setDate(d);
+					myforecast.setDate(d.getDate()+"-"+d.getMonth()+"-"+d.getYear());
+					myforecast.setTimeRange(d.getHours()+"-"+(d.getHours()+1));
 					myforecast.setHumidity(forecast.getHumidity());
 					myforecast.setIconUrl(forecast.getIcon_url());
 					alist.add(myforecast);
@@ -103,8 +104,8 @@ public class WeatherAPI {
 					daywiseList.add(myforecast);
 				}
 			}
-			HourComparator hc = new HourComparator();
-			Collections.sort(daywiseList, hc);
+			//HourComparator hc = new HourComparator();
+			//Collections.sort(daywiseList, hc);
 			datemap.put(d.getDate() + "-" + d.getMonth() + "-" + d.getYear(),daywiseList);
 		}
 	}
