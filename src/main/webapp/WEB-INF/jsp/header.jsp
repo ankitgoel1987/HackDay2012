@@ -137,8 +137,8 @@
 							<li><a href="location">Explore</a></li>
 							<li class="divider-vertical"></li>
 							<li><a href="#">Services</a></li>
-							<li class="divider-vertical"></li>
 							<li><a href="#">About Us</a></li>
+							<li class="divider-vertical"></li>
 							<li><a href="confirmReg">Confirm Registration</a></li>
 							<li><a href="confirmBooking">Confirm Booking</a></li>
 							<li><a href="sendReminder">Send Reminder</a></li>
@@ -154,7 +154,8 @@
  	out.println(user.getName());
  %> <b class="caret"></b> </a>
 								<ul class="dropdown-menu">
-									<li><a href="#">Account settings</a></li>
+									<li><a href="accountsettings">Account settings</a></li>
+									<li><a href="bookteetime">Book Tee Time</a></li>
 									<li><a href="myBookings">My Bookings</a></li>
 									<li class="divider"></li>
 									<li><a
@@ -165,7 +166,6 @@
 						<%
 							} else {
 						%>
-
 
 						<ul class="nav pull-right">
 							<li><a data-toggle="modal" href="#myModal">Create an
