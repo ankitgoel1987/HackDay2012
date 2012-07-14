@@ -220,7 +220,7 @@ public class Golfcourse implements java.io.Serializable {
 		this.googleMapUrl = googleMapUrl;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "golfcourse")
+	@OneToMany(mappedBy = "golfcourse")
 	public Set<Users> getUserses() {
 		return this.userses;
 	}
@@ -229,7 +229,7 @@ public class Golfcourse implements java.io.Serializable {
 		this.userses = userses;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "golfcourse")
+	@OneToMany(mappedBy = "golfcourse")
 	public Set<Reservationdetails> getReservationdetailses() {
 		return this.reservationdetailses;
 	}
@@ -238,7 +238,7 @@ public class Golfcourse implements java.io.Serializable {
 		this.reservationdetailses = reservationdetailses;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "golfcourse")
+	@OneToOne(mappedBy = "golfcourse")
 	public Capacity getCapacity() {
 		return this.capacity;
 	}

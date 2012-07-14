@@ -56,7 +56,7 @@ public class Capacity implements java.io.Serializable {
 		this.capacityId = capacityId;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne()
 	@PrimaryKeyJoinColumn
 	public Golfcourse getGolfcourse() {
 		return this.golfcourse;

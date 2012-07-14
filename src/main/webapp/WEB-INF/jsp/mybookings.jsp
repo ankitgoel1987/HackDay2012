@@ -1,101 +1,59 @@
 <jsp:include page="header.jsp" />
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!-- Middle part for booking table -->
 <div class="container">
 	<div>
-		<form class="form-horizontal">
+
+		<c:url var="searchURL" value="searchBooking" />
+		<c:url var="cancelBookingURL" value="cancelBooking" />
+
+		<form:form commandName="searchBookings" method="POST"
+			action="${searchURL}" class="form-horizontal">
 			<fieldset>
 				<div class="control-group">
 					<label class="control-label" for="input01">Search by
 						booking ID</label>
 					<div class="controls">
 						<!-- Make this type ahead -->
-						<input type="text" class="input-xlarge" id="input01">
+						<form:input path="searchText" class="input-xlarge" id="searchText" />
 						<button type="submit" class="btn btn-primary">Search</button>
 					</div>
-
 				</div>
-
 			</fieldset>
-		</form>
+		</form:form>
 
 	</div>
-	<div>
-		<table class="table table-striped table-bordered">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>Confirmation Id</th>
-					<th>Booking Date</th>
-					<th>Match Date</th>
-					<th>Number of Golfer</th>
-					<th>Booking Status</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td><input type="checkbox" name="optionsCheckboxList2"
-						value="option2"></td>
-					<td>6:00AM-7:00AM</td>
-					<td>6:00AM-7:00AM</td>
-					<td>6:00AM-7:00AM</td>
-					<td>6:00AM-7:00AM</td>
-					<td>6:00AM-7:00AM</td>
-				</tr>
-
-				<tr>
-					<td><input type="checkbox" name="optionsCheckboxList2"
-						value="option2"></td>
-					<td>6:00AM-7:00AM</td>
-					<td>6:00AM-7:00AM</td>
-					<td>6:00AM-7:00AM</td>
-					<td>6:00AM-7:00AM</td>
-					<td>6:00AM-7:00AM</td>
-				</tr>
-
-				<tr>
-					<td><input type="checkbox" name="optionsCheckboxList2"
-						value="option2"></td>
-					<td>6:00AM-7:00AM</td>
-					<td>6:00AM-7:00AM</td>
-					<td>6:00AM-7:00AM</td>
-					<td>6:00AM-7:00AM</td>
-					<td>6:00AM-7:00AM</td>
-				</tr>
-
-				<tr>
-					<td><input type="checkbox" name="optionsCheckboxList2"
-						value="option2"></td>
-					<td>6:00AM-7:00AM</td>
-					<td>6:00AM-7:00AM</td>
-					<td>6:00AM-7:00AM</td>
-					<td>6:00AM-7:00AM</td>
-					<td>6:00AM-7:00AM</td>
-				</tr>
-
-				<tr>
-					<td><input type="checkbox" name="optionsCheckboxList2"
-						value="option2"></td>
-					<td>6:00AM-7:00AM</td>
-					<td>6:00AM-7:00AM</td>
-					<td>6:00AM-7:00AM</td>
-					<td>6:00AM-7:00AM</td>
-					<td>6:00AM-7:00AM</td>
-				</tr>
-
-				<tr>
-					<td><input type="checkbox" name="optionsCheckboxList2"
-						value="option2"></td>
-					<td>6:00AM-7:00AM</td>
-					<td>6:00AM-7:00AM</td>
-					<td>6:00AM-7:00AM</td>
-					<td>6:00AM-7:00AM</td>
-					<td>6:00AM-7:00AM</td>
-				</tr>
-
-			</tbody>
-		</table>
-
-	</div>
-	<button type="submit" class="btn btn-danger">Cancel Booking</button>
+	<form:form commandName="reservationdetailsList" method="POST"
+		action="${cancelBookingURL}" class="form-horizontal">
+		<div>
+			<table class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Confirmation Id</th>
+						<th>Booking Date</th>
+						<th>Match Date</th>
+						<th>Number of Golfers</th>
+						<th>Booking Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${reservationdetailsList.reservationdetails}" var="temp">
+						<tr>
+						<td><input type="checkbox" name="optionsCheckboxList2"
+							value="option2"></td>
+							<td><c:out value="${temp.confirmationNumber}" /></td>
+							<td><c:out value="${temp.bookingDateTime}" /></td>
+							<td><c:out value="${temp.teeDateTime}" /></td>
+							<td><c:out value="${temp.noOfGolfers}" /></td>
+							<td><c:out value="${temp.status}" /></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+		<button type="submit" class="btn btn-danger">Cancel Booking</button>
+	</form:form>
 </div>
 <jsp:include page="footer.jsp" />

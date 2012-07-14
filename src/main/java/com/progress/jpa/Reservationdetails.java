@@ -60,7 +60,7 @@ public class Reservationdetails implements java.io.Serializable {
 		this.confirmationNumber = confirmationNumber;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name = "golfCourseID")
 	public Golfcourse getGolfcourse() {
 		return this.golfcourse;
@@ -70,7 +70,7 @@ public class Reservationdetails implements java.io.Serializable {
 		this.golfcourse = golfcourse;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name = "userID")
 	public Users getUsers() {
 		return this.users;

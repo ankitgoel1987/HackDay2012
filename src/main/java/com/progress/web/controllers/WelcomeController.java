@@ -37,6 +37,13 @@ public class WelcomeController {
 		return "location";
 
 	}	
+	
+	@RequestMapping(value = "gallery", method = RequestMethod.GET)
+	public String showGallery(ModelMap model, Principal principal) {
+		System.out.println("Welcome Controller\n");
+		model.addAttribute("principal", principal);
+		return "gallery";
+	}	
 
 	@RequestMapping(value = "/member", method = RequestMethod.GET)
 	public String memberWelcome(ModelMap model, Principal principal) {

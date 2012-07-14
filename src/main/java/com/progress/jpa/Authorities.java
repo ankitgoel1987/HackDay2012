@@ -53,7 +53,7 @@ public class Authorities implements java.io.Serializable {
 		this.authority = authority;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "authority")
+	@OneToMany(mappedBy = "authority")
 	public Set<Users> getUserses() {
 		return this.userses;
 	}

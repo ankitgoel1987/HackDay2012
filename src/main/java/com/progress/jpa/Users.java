@@ -42,7 +42,7 @@ public class Users implements java.io.Serializable, UserDetails {
 	@ManyToOne()
 	@JoinColumn(name = "golfCourseID")
 	private Golfcourse golfcourse;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name = "authorityID")
 	private Authorities authority;
 	@Column(name = "username", length = 50)

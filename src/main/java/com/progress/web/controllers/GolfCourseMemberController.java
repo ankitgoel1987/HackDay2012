@@ -10,7 +10,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.progress.jpa.ReservationDetailsList;
 import com.progress.jpa.Reservationdetails;
+import com.progress.jpa.SearchBookings;
 import com.progress.jpa.Users;
 import com.progress.services.impl.BookingServiceImpl;
 
@@ -63,9 +65,13 @@ public class GolfCourseMemberController {
 		if(user == null) {
 			return "index";
 		}
+		SearchBookings searchBookings = new SearchBookings();
 		List<Reservationdetails> reservationdetails = bookingServiceImpl.getReservationDetailsByUserID(user.getUserId());
+		ReservationDetailsList reservationdetailsList = new ReservationDetailsList();
+		reservationdetailsList.setReservationdetails(reservationdetails);
 		model.addAttribute("principal", principal);
-		model.addAttribute("reservationdetailsList", reservationdetails);
+		model.addAttribute("reservationdetailsList", reservationdetailsList);
+		model.addAttribute("searchBookings", searchBookings);
 		return "mybookings";
 	}
 
@@ -79,6 +85,7 @@ public class GolfCourseMemberController {
 	@RequestMapping(value = "accountsettings", method = RequestMethod.GET)
 	public String accountSettings(ModelMap model, Principal principal) {
 		System.out.println("Account Settings Controller\n");
+		model.addAttribute("principal", principal);
 		return "accountchange";
 	}
 	

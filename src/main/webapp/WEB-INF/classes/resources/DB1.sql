@@ -1,3 +1,16 @@
+CREATE TABLE hourlydata (
+  hourlyDataID varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  weatherCondition varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  weatherDate varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  humidity varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  iconUrl varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  temperature varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  timeRange varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (hourlyDataID),
+  UNIQUE KEY hourlyDataID (hourlyDataID)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
 CREATE TABLE users (
   userID int(11) NOT NULL AUTO_INCREMENT,
   email varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
