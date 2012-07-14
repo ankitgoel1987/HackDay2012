@@ -1,13 +1,14 @@
 package com.progress.services.impl;
 
-import com.progress.dao.interfaces.UserDao;
-import com.progress.jpa.Users;
-import com.progress.services.interfaces.UserService;
-
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.progress.dao.interfaces.UserDao;
+import com.progress.jpa.Users;
+import com.progress.services.interfaces.UserService;
 
 /**
  * 
@@ -51,6 +52,13 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public void addLogin(Users user) {
 		userDao.addLogin(user);
+		return;
+	}
+	
+	@Override
+	@Transactional
+	public void updateUser(Users user) {
+		userDao.updateUser(user);
 		return;
 	}
 }

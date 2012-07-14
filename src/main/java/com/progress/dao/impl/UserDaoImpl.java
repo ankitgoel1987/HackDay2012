@@ -125,4 +125,16 @@ public class UserDaoImpl implements UserDao {
 
 		return;
 	}
+	
+	@Override
+	@Transactional
+	public void updateUser(Users user) {
+		Session session = sessionFactory.getCurrentSession();
+
+		System.out.println("Entering addLogin in daoimpl\n");
+		session.saveOrUpdate(user);
+		System.out.println("done addLogin in daoimpl\n");
+
+		return;
+	}
 }

@@ -2,6 +2,8 @@ package com.progress.dao.interfaces;
 
 import java.util.List;
 
+import org.hibernate.Session;
+
 import com.progress.jpa.Users;
 
 /**
@@ -17,4 +19,6 @@ public interface UserDao {
 	public List<Users> getAll();
 
 	public void addLogin(Users user);
+	
+	public void updateUser(Users user);
 }

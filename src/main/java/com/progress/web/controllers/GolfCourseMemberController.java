@@ -8,7 +8,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -49,20 +51,6 @@ public class GolfCourseMemberController {
 		return user;
 	}
 
-	// @RequestMapping(value = "newBooking", method = RequestMethod.GET)
-	// public String showTeeTime(ModelMap model, Principal principal) {
-	// System.out.println("GolfCourseMember Controller\n");
-	// model.addAttribute("principal", principal);
-	// return "booking";
-	// }
-	//
-	// @RequestMapping(value = "newBooking", method = RequestMethod.POST)
-	// public String bookTeeTime(ModelMap model, Principal principal) {
-	// System.out.println("GolfCourseMember Controller\n");
-	// model.addAttribute("principal", principal);
-	// return "booking";
-	// }
-
 	@RequestMapping(value = "myBookings", method = RequestMethod.GET)
 	public String showMyBookings(ModelMap model, Principal principal) {
 		System.out.println("GolfCourseMember Controller\n");
@@ -93,6 +81,24 @@ public class GolfCourseMemberController {
 	public String accountSettings(ModelMap model, Principal principal) {
 		System.out.println("Account Settings Controller\n");
 		model.addAttribute("principal", principal);
+		Users user = getAuthenticatedUser(principal);
+		if (user == null) {
+			return "index";
+		}
+		model.addAttribute("user", user);
+		return "accountchange";
+	}
+
+	@RequestMapping(value = "accountsettings", method = RequestMethod.POST)
+	public String saveAccountSettings(@ModelAttribute("user") Users user,
+			Model model, Principal principal) {
+		System.out.println("Account Settings Controller\n");
+		model.addAttribute("principal", principal);
+		// userService123.updateUser(user);
+		if (user == null) {
+			return "index";
+		}
+		model.addAttribute("user", user);
 		return "accountchange";
 	}
 
@@ -100,11 +106,12 @@ public class GolfCourseMemberController {
 	public String bookTeeTime(ModelMap model, Principal principal) {
 		System.out.println("Book tee Time Controller\n");
 		// create Calendar instance
-				Calendar now = Calendar.getInstance();
-				int currmonth = now.get(Calendar.MONTH) + 1;
-				int currday = now.get(Calendar.DATE);
-				int curryear = now.get(Calendar.YEAR);
-		List<HourlyData> hourlyDataList = weatherServiceImpl.getHourlyData(new Date(curryear, currmonth, currday));
+		Calendar now = Calendar.getInstance();
+		int currmonth = now.get(Calendar.MONTH) + 1;
+		int currday = now.get(Calendar.DATE);
+		int curryear = now.get(Calendar.YEAR);
+		List<HourlyData> hourlyDataList = weatherServiceImpl
+				.getHourlyData(new Date(curryear, currmonth, currday));
 		model.addAttribute("principal", principal);
 		model.addAttribute("hourlyDataList", hourlyDataList);
 		boolean authenticated = false;
@@ -112,7 +119,7 @@ public class GolfCourseMemberController {
 		if (token != null) {
 			authenticated = token.isAuthenticated();
 		}
-		if(authenticated)
+		if (authenticated)
 			return "booking";
 		else
 			return "index";

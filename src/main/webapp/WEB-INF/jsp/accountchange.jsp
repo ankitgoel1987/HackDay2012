@@ -1,6 +1,6 @@
 <jsp:include page="header.jsp" />
-
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!-- Model for enter booking details form -->
 
@@ -20,26 +20,31 @@
 		<thead>
 		</thead>
 		<tbody>
-			<form action="" id="contact-form" class="form-horizontal">
+			<form:form commandName="user" method="POST" action="accountsettings"
+				id="contact-form" class="form-horizontal">
 				<fieldset>
 					<legend> Your infromation Form </legend>
+					
 					<div class="control-group">
-						<label class="control-label" for="name">Your Name</label>
+						<form:label path="username" class="control-label" for="name">Your Name</</form:label>
 						<div class="controls">
-							<input type="text" class="input-xlarge" name="name" id="name">
+							<form:input path="username" class="input-xlarge" name="name"
+								id="name"></form:input>
 						</div>
 					</div>
+					
 					<div class="control-group">
-						<label class="control-label" for="email">Email Address</label>
+						<form:label path="email" for="email">Email Address</form:label>
 						<div class="controls">
-							<input type="text" class="input-xlarge" name="email" id="email">
+							<form:input path="email" class="input-xlarge" name="email"	id="email"></form:input>
 						</div>
 					</div>
+					
 					<div class="control-group">
-						<label class="control-label" for="subject">Phone Number</label>
+						<form:label path="phoneNumber" class="control-label" for="subject">Phone Number</form:label>
 						<div class="controls">
-							<input type="text" class="input-xlarge" name="subject"
-								id="subject">
+							<form:input path="phoneNumber" class="input-xlarge"
+								name="subject" id="subject"></form:input>
 						</div>
 					</div>
 
@@ -47,8 +52,9 @@
 						<button type="submit" class="btn">Submit</button>
 						<button type="reset" class="btn">Cancel</button>
 					</div>
+					
 				</fieldset>
-			</form>
+			</form:form>
 		</tbody>
 	</table>
 </div>

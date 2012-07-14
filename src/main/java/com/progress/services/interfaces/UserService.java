@@ -17,4 +17,6 @@ public interface UserService {
 	public abstract List<Users> getAll();
 
 	public abstract void addLogin(Users user);
+	
+	public void updateUser(Users user);
 }
