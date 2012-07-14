@@ -12,39 +12,38 @@
 <html>
 <head>
 <script>
-function initialize_map() {
-	// Check for geo-location support
-//	if (navigator.geolocation) {
+	function initialize_map() {
+		// Check for geo-location support
+		//	if (navigator.geolocation) {
 		// Use method getCurrentPosition to get coordinates
-//		navigator.geolocation.getCurrentPosition(function(position) {
-			// Access them accordingly
-//			console.log(position);
-//			var currentLatLng = new google.maps.LatLng(
-//					position.coords.latitude, position.coords.longitude);
-	
-			var currentLatLng = new google.maps.LatLng(17.46651,78.36321659999999);
-			
-			var myOptions = {
-				center : currentLatLng,
-				zoom : 8,
-				mapTypeId : google.maps.MapTypeId.ROADMAP,
-				streetViewControl : false,
-				panControl : false,
-				mapTypeControl : false,
-//				zoomControlOptions : {
-//					style : google.maps.ZoomControlStyle.SMALL
-//				}
-				zoomControl: false
-			};
-			map = new google.maps.Map(document.getElementById("map_canvas"),
-					myOptions);
-			map.setCenter(currentLatLng);
-//			console.log(currentLatLng);
-//			showMarker(currentLatLng);
-//		});
-//	}
-}
+		//		navigator.geolocation.getCurrentPosition(function(position) {
+		// Access them accordingly
+		//			console.log(position);
+		//			var currentLatLng = new google.maps.LatLng(
+		//					position.coords.latitude, position.coords.longitude);
 
+		var currentLatLng = new google.maps.LatLng(17.46651, 78.36321659999999);
+
+		var myOptions = {
+			center : currentLatLng,
+			zoom : 8,
+			mapTypeId : google.maps.MapTypeId.ROADMAP,
+			streetViewControl : false,
+			panControl : false,
+			mapTypeControl : false,
+			//				zoomControlOptions : {
+			//					style : google.maps.ZoomControlStyle.SMALL
+			//				}
+			zoomControl : false
+		};
+		map = new google.maps.Map(document.getElementById("map_canvas"),
+				myOptions);
+		map.setCenter(currentLatLng);
+		//			console.log(currentLatLng);
+		//			showMarker(currentLatLng);
+		//		});
+		//	}
+	}
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Golf Club</title>
@@ -55,13 +54,16 @@ function initialize_map() {
 <link href="<c:url value="/resources/css/modifiedBootstrap.css" />"
 	rel="stylesheet">
 <link href="<c:url value="/resources/css/app.css" />" rel="stylesheet">
-<script src="<c:url value="/resources/js/loadFBSdk.js" />"></script>
+<script src="<c:url value="/resources/js/loadSocialSdk.js" />"></script>
+<link rel="shortcut icon"
+	href="<c:url value="/resources/img/icon.ico" />" />
 </head>
 <body>
 	<div id="fb-root"></div>
 	<script>
 		//Loading FB SDK
 		load_FB_sdk('361202527286458');
+		loadTwitter();
 	</script>
 
 	<%
@@ -88,35 +90,41 @@ function initialize_map() {
 	%>
 	<div class="container">
 		<div class="container container-top">
-		<img class ="pull-left" alt="banner image" src="<c:url value="/resources/img/top_backgroundImage_1.jpg"/>" >
-			<div class=" top-right">
-				<div>
-					<address>
-						<strong>Contact us:</strong><br> <a href="mailto:#">pavan@gmail.com</a>
-					</address>
+			<!-- Banner -->
+			<div class="row show-grid">
+				<!-- Banner Image  -->
+				<div class="span10">
+					<img class="banner-image" alt="banner image"
+						src="<c:url value="/resources/img/top_backgroundImage_1.jpg"/>" />
 				</div>
-				<div>
-					<a href="https://twitter.com/share" class="twitter-share-button"
-						data-url="http://localhost:8080/BootstrapSampleProject/learningBootstrap.jsp">Tweet</a>
-					<script>
-						!function(d, s, id) {
-							var js, fjs = d.getElementsByTagName(s)[0];
-							if (!d.getElementById(id)) {
-								js = d.createElement(s);
-								js.id = id;
-								js.src = "//platform.twitter.com/widgets.js";
-								fjs.parentNode.insertBefore(js, fjs);
-							}
-						}(document, "script", "twitter-wjs");
-					</script>
+				<!-- Social Integration -->
+				<div class="banner-top-right span2 offset10">
+					<div>
+						<address>
+							<strong>Golf Club</strong><br> 795 Folsom Ave, Suite 600<br>
+						</address>
+						<div>
+							<div class="pull-left" style="width: 40%">
+								<a href="https://twitter.com/share" class="twitter-share-button"
+									data-url="http://localhost:8080/BootstrapSampleProject/learningBootstrap.jsp">Tweet</a>
+								<script>
+									
+								</script>
+							</div>
+
+							<div style="width: 45%" class="fb-like fb-Button pull-right"
+								data-href="http://localhost:8080/BootstrapSampleProject/learningBootstrap.jsp"
+								data-send="false" data-layout="button_count" data-width="20"
+								data-show-faces="false" data-action="Like" data-font="segoe ui"></div>
+						</div>
+					</div>
+
+
 				</div>
-				<div class="fb-like fb-Button"
-					data-href="http://localhost:8080/BootstrapSampleProject/learningBootstrap.jsp"
-					data-send="false" data-layout="button_count" data-width="20"
-					data-show-faces="false" data-action="Like" data-font="segoe ui"></div>
+
 			</div>
 		</div>
-
+		<!-- Navigation bar -->
 		<div class="container">
 			<div class="navbar">
 				<div class="navbar-inner">
@@ -147,7 +155,7 @@ function initialize_map() {
  %> <b class="caret"></b> </a>
 								<ul class="dropdown-menu">
 									<li><a href="#">Account settings</a></li>
-									<li><a href="#">My Bookings</a></li>
+									<li><a href="myBookings">My Bookings</a></li>
 									<li class="divider"></li>
 									<li><a
 										href='<spring:url value="/j_spring_security_logout" htmlEscape="true" />'>Sign
@@ -230,5 +238,4 @@ function initialize_map() {
 			</div>
 
 		</div>
-		</div>
-		
+	</div>

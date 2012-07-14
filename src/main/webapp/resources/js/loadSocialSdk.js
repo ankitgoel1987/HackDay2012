@@ -4,12 +4,13 @@ function load_FB_sdk(app_id) {
 			appId : app_id, // App ID
 			channelUrl : './channel.html', // Channel File
 			status : true, // check login status
-			cookie : true, // enable cookies to allow the server to access the session
+			cookie : true, // enable cookies to allow the server to access the
+							// session
 			xfbml : true
 		});
 
 		// Additional initialization code here
-//		initialize_fb(app_id);
+		// initialize_fb(app_id);
 	};
 }
 // Load the SDK Asynchronously
@@ -24,3 +25,15 @@ function load_FB_sdk(app_id) {
 	js.src = "//connect.facebook.net/en_US/all.js";
 	ref.parentNode.insertBefore(js, ref);
 }(document));
+
+function loadTwitter() {
+	!function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (!d.getElementById(id)) {
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "//platform.twitter.com/widgets.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}
+	}(document, "script", "twitter-wjs");
+}
