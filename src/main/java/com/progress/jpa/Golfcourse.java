@@ -1,14 +1,16 @@
 package com.progress.jpa;
+
 // default package
 // Generated Jul 13, 2012 12:48:05 AM by Hibernate Tools 3.4.0.CR1
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -17,61 +19,30 @@ import javax.persistence.Table;
 /**
  * 
  * @author agoel
- *
+ * 
  */
 @Entity
 @Table(name = "golfcourse")
 public class Golfcourse implements java.io.Serializable {
-
 	private Integer golfCourseId;
 	private String name;
-	private byte[] bannerImage;
+	private String bannerImageURL;
 	private String urlExtension;
-	private String homePageMenuName;
-	private Boolean homePageHtml;
-	private byte[] homePageImage;
-	private String homePageText;
-	private String facilityPageMenuName;
-	private Boolean facilityPageHtml;
-	private byte[] facilityPageImage;
-	private String facilityPageText;
+
+	private String homePageShortText;
+	private String homePageLongText;
+	private String imageURL1;
+	private String imageURL2;
+	private String imageURL3;
 	private String cssName;
-	private Boolean contactUsPageHtml;
-	private String contactUsPageText;
-	private String googleMapUrl;
+	private String latitude;
+	private String longitude;
 	private Set<Users> userses = new HashSet<Users>(0);
-	private Set<Reservationdetails> reservationdetailses = new HashSet<Reservationdetails>(0);
+	private Set<Reservationdetails> reservationdetailses = new HashSet<Reservationdetails>(
+			0);
 	private Capacity capacity;
 
 	public Golfcourse() {
-	}
-
-	public Golfcourse(String name, byte[] bannerImage, String urlExtension,
-			String homePageMenuName, Boolean homePageHtml,
-			byte[] homePageImage, String homePageText,
-			String facilityPageMenuName, Boolean facilityPageHtml,
-			byte[] facilityPageImage, String facilityPageText, String cssName,
-			Boolean contactUsPageHtml, String contactUsPageText,
-			String googleMapUrl, Set<Users> userses, Set<Reservationdetails> reservationdetailses,
-			Capacity capacity) {
-		this.name = name;
-		this.bannerImage = bannerImage;
-		this.urlExtension = urlExtension;
-		this.homePageMenuName = homePageMenuName;
-		this.homePageHtml = homePageHtml;
-		this.homePageImage = homePageImage;
-		this.homePageText = homePageText;
-		this.facilityPageMenuName = facilityPageMenuName;
-		this.facilityPageHtml = facilityPageHtml;
-		this.facilityPageImage = facilityPageImage;
-		this.facilityPageText = facilityPageText;
-		this.cssName = cssName;
-		this.contactUsPageHtml = contactUsPageHtml;
-		this.contactUsPageText = contactUsPageText;
-		this.googleMapUrl = googleMapUrl;
-		this.userses = userses;
-		this.reservationdetailses = reservationdetailses;
-		this.capacity = capacity;
 	}
 
 	@Id
@@ -85,6 +56,15 @@ public class Golfcourse implements java.io.Serializable {
 		this.golfCourseId = golfCourseId;
 	}
 
+	@Column(name = "urlExtension", length = 50)
+	public String getUrlExtension() {
+		return urlExtension;
+	}
+
+	public void setUrlExtension(String urlExtension) {
+		this.urlExtension = urlExtension;
+	}
+
 	@Column(name = "name", length = 50)
 	public String getName() {
 		return this.name;
@@ -94,94 +74,76 @@ public class Golfcourse implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "bannerImage")
-	public byte[] getBannerImage() {
-		return this.bannerImage;
+	@Column(name = "bannerImageURL", length = 100)
+	public String getBannerImageURL() {
+		return bannerImageURL;
 	}
 
-	public void setBannerImage(byte[] bannerImage) {
-		this.bannerImage = bannerImage;
+	public void setBannerImageURL(String bannerImageURL) {
+		this.bannerImageURL = bannerImageURL;
 	}
 
-	@Column(name = "urlExtension", length = 50)
-	public String getUrlExtension() {
-		return this.urlExtension;
+	@Column(name = "homePageShortText", length = 100)
+	public String getHomePageShortText() {
+		return homePageShortText;
 	}
 
-	public void setUrlExtension(String urlExtension) {
-		this.urlExtension = urlExtension;
+	public void setHomePageShortText(String homePageShortText) {
+		this.homePageShortText = homePageShortText;
 	}
 
-	@Column(name = "homePageMenuName", length = 50)
-	public String getHomePageMenuName() {
-		return this.homePageMenuName;
+	@Column(name = "homePageLongText", length = 100)
+	public String getHomePageLongText() {
+		return homePageLongText;
 	}
 
-	public void setHomePageMenuName(String homePageMenuName) {
-		this.homePageMenuName = homePageMenuName;
+	public void setHomePageLongText(String homePageLongText) {
+		this.homePageLongText = homePageLongText;
 	}
 
-	@Column(name = "homePageHTML")
-	public Boolean getHomePageHtml() {
-		return this.homePageHtml;
+	@Column(name = "imageURL1", length = 100)
+	public String getImageURL1() {
+		return imageURL1;
 	}
 
-	public void setHomePageHtml(Boolean homePageHtml) {
-		this.homePageHtml = homePageHtml;
+	public void setImageURL1(String imageURL1) {
+		this.imageURL1 = imageURL1;
 	}
 
-	@Column(name = "homePageImage")
-	public byte[] getHomePageImage() {
-		return this.homePageImage;
+	@Column(name = "imageURL2", length = 100)
+	public String getImageURL2() {
+		return imageURL2;
 	}
 
-	public void setHomePageImage(byte[] homePageImage) {
-		this.homePageImage = homePageImage;
+	public void setImageURL2(String imageURL2) {
+		this.imageURL2 = imageURL2;
 	}
 
-	@Column(name = "homePageText", length = 500)
-	public String getHomePageText() {
-		return this.homePageText;
+	@Column(name = "imageURL3", length = 100)
+	public String getImageURL3() {
+		return imageURL3;
 	}
 
-	public void setHomePageText(String homePageText) {
-		this.homePageText = homePageText;
+	public void setImageURL3(String imageURL3) {
+		this.imageURL3 = imageURL3;
 	}
 
-	@Column(name = "facilityPageMenuName", length = 50)
-	public String getFacilityPageMenuName() {
-		return this.facilityPageMenuName;
+	@Column(name = "latitude", length = 100)
+	public String getLatitude() {
+		return latitude;
 	}
 
-	public void setFacilityPageMenuName(String facilityPageMenuName) {
-		this.facilityPageMenuName = facilityPageMenuName;
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
 	}
 
-	@Column(name = "facilityPageHTML")
-	public Boolean getFacilityPageHtml() {
-		return this.facilityPageHtml;
+	@Column(name = "longitude", length = 100)
+	public String getLongitude() {
+		return longitude;
 	}
 
-	public void setFacilityPageHtml(Boolean facilityPageHtml) {
-		this.facilityPageHtml = facilityPageHtml;
-	}
-
-	@Column(name = "facilityPageImage")
-	public byte[] getFacilityPageImage() {
-		return this.facilityPageImage;
-	}
-
-	public void setFacilityPageImage(byte[] facilityPageImage) {
-		this.facilityPageImage = facilityPageImage;
-	}
-
-	@Column(name = "facilityPageText", length = 500)
-	public String getFacilityPageText() {
-		return this.facilityPageText;
-	}
-
-	public void setFacilityPageText(String facilityPageText) {
-		this.facilityPageText = facilityPageText;
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
 	}
 
 	@Column(name = "cssName", length = 50)
@@ -191,33 +153,6 @@ public class Golfcourse implements java.io.Serializable {
 
 	public void setCssName(String cssName) {
 		this.cssName = cssName;
-	}
-
-	@Column(name = "contactUsPageHTML")
-	public Boolean getContactUsPageHtml() {
-		return this.contactUsPageHtml;
-	}
-
-	public void setContactUsPageHtml(Boolean contactUsPageHtml) {
-		this.contactUsPageHtml = contactUsPageHtml;
-	}
-
-	@Column(name = "contactUsPageText", length = 500)
-	public String getContactUsPageText() {
-		return this.contactUsPageText;
-	}
-
-	public void setContactUsPageText(String contactUsPageText) {
-		this.contactUsPageText = contactUsPageText;
-	}
-
-	@Column(name = "googleMapUrl", length = 50)
-	public String getGoogleMapUrl() {
-		return this.googleMapUrl;
-	}
-
-	public void setGoogleMapUrl(String googleMapUrl) {
-		this.googleMapUrl = googleMapUrl;
 	}
 
 	@OneToMany(mappedBy = "golfcourse")
@@ -234,7 +169,8 @@ public class Golfcourse implements java.io.Serializable {
 		return this.reservationdetailses;
 	}
 
-	public void setReservationdetailses(Set<Reservationdetails> reservationdetailses) {
+	public void setReservationdetailses(
+			Set<Reservationdetails> reservationdetailses) {
 		this.reservationdetailses = reservationdetailses;
 	}
 
@@ -246,5 +182,4 @@ public class Golfcourse implements java.io.Serializable {
 	public void setCapacity(Capacity capacity) {
 		this.capacity = capacity;
 	}
-
 }

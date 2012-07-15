@@ -69,7 +69,7 @@
 		destroy-method="close">
 		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<beans:property name="url"
-			value="jdbc:mysql://localhost:3306/poiso7" />
+			value="jdbc:mysql://localhost:3306/poi10" />
 		<beans:property name="username" value="root" />
 		<beans:property name="password" value="progress123$" />
 	</beans:bean>
@@ -114,6 +114,9 @@
 	</beans:bean>
 
 	<!-- ========================= BEANS ======================== -->
+	<beans:bean id="golfCourseDao" class="com.progress.dao.impl.GolfCourseDaoImpl">
+		<beans:property name="sessionFactory" ref="sessionFactory" />
+	</beans:bean>
 	<beans:bean id="userDao" class="com.progress.dao.impl.UserDaoImpl">
 		<beans:property name="sessionFactory" ref="sessionFactory" />
 	</beans:bean>
@@ -128,6 +131,10 @@
 		<beans:property name="sessionFactory" ref="sessionFactory" />
 	</beans:bean>
 
+	<beans:bean id="gcServiceImpl"
+		class="com.progress.services.impl.GcRegistrationServiceImpl">
+		<beans:property name="golfCourseDao" ref="golfCourseDao" />
+	</beans:bean>
 	<beans:bean id="userService" class="com.progress.services.impl.UserServiceImpl">
 		<beans:property name="userDao" ref="userDao" />
 	</beans:bean>
