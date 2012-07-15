@@ -21,6 +21,7 @@ import com.progress.jpa.SearchBookings;
 import com.progress.jpa.Users;
 import com.progress.services.impl.BookingServiceImpl;
 import com.progress.services.impl.WeatherServiceImpl;
+import com.progress.services.interfaces.UserService;
 
 /**
  * 
@@ -34,6 +35,8 @@ public class GolfCourseMemberController {
 	private BookingServiceImpl bookingServiceImpl;
 	@Autowired
 	private WeatherServiceImpl weatherServiceImpl;
+	@Autowired
+	private UserService userService;
 
 	private Users getAuthenticatedUser(Principal temp) {
 		boolean authenticated = false;
@@ -74,6 +77,10 @@ public class GolfCourseMemberController {
 	public String cancelMyBookings(ModelMap model, Principal principal) {
 		System.out.println("GolfCourseMember Controller\n");
 		model.addAttribute("principal", principal);
+		Users user = getAuthenticatedUser(principal);
+		if (user == null) {
+			return "index";
+		}
 		return "mybookings";
 	}
 
@@ -85,7 +92,8 @@ public class GolfCourseMemberController {
 		if (user == null) {
 			return "index";
 		}
-		model.addAttribute("user", user);
+		Users temp = userService.getUserByUserName(user.getUsername());
+		model.addAttribute("user", temp);
 		return "accountchange";
 	}
 
@@ -94,34 +102,33 @@ public class GolfCourseMemberController {
 			Model model, Principal principal) {
 		System.out.println("Account Settings Controller\n");
 		model.addAttribute("principal", principal);
-		// userService123.updateUser(user);
+		Users authUser = getAuthenticatedUser(principal);
 		if (user == null) {
 			return "index";
 		}
-		model.addAttribute("user", user);
+		Users temp = userService.getUserByUserName(authUser.getUsername());
+		temp.setEmail(user.getEmail());
+		temp.setPhoneNumber(user.getPhoneNumber());
+		temp.setName(user.getName());
+		userService.updateUser(temp);
 		return "accountchange";
 	}
 
 	@RequestMapping(value = "bookteetime", method = RequestMethod.GET)
 	public String bookTeeTime(ModelMap model, Principal principal) {
 		System.out.println("Book tee Time Controller\n");
-		// create Calendar instance
+		model.addAttribute("principal", principal);
+		Users user = getAuthenticatedUser(principal);
+		if (user == null) {
+			return "index";
+		}
 		Calendar now = Calendar.getInstance();
 		int currmonth = now.get(Calendar.MONTH) + 1;
 		int currday = now.get(Calendar.DATE);
 		int curryear = now.get(Calendar.YEAR);
 		List<HourlyData> hourlyDataList = weatherServiceImpl
 				.getHourlyData(new Date(curryear, currmonth, currday));
-		model.addAttribute("principal", principal);
 		model.addAttribute("hourlyDataList", hourlyDataList);
-		boolean authenticated = false;
-		UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) principal;
-		if (token != null) {
-			authenticated = token.isAuthenticated();
-		}
-		if (authenticated)
-			return "booking";
-		else
-			return "index";
+		return "index";
 	}
 }

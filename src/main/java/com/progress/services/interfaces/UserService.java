@@ -10,13 +10,16 @@ import com.progress.jpa.Users;
  * 
  */
 public interface UserService {
-	public abstract Users getUserByUserName(String userName);
+	public Users getUserByUserName(String userName);
 
-	public abstract List<String> getAuthoritiesByUserName(String userName);
+	public Users getUserByUserID(int userID);
+	
+	public List<String> getAuthoritiesByUserName(String userName);
 
-	public abstract List<Users> getAll();
+	public List<Users> getAll();
 
-	public abstract void addLogin(Users user);
+	public void addLogin(Users user);
 	
 	public void updateUser(Users user);
+
 }

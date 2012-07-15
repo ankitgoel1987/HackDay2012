@@ -14,6 +14,8 @@ import com.progress.jpa.Users;
 public interface UserDao {
 	public Users getUserByUserName(String userName);
 
+	public Users getUserByUserID(int userID);
+
 	public List<String> getAuthoritiesByUserName(String userName);
 
 	public List<Users> getAll();
@@ -21,4 +23,5 @@ public interface UserDao {
 	public void addLogin(Users user);
 	
 	public void updateUser(Users user);
+
 }

@@ -26,9 +26,9 @@
 					<legend> Your infromation Form </legend>
 					
 					<div class="control-group">
-						<form:label path="username" class="control-label" for="name">Your Name</</form:label>
+						<form:label path="name" class="control-label" for="name">Your Name</</form:label>
 						<div class="controls">
-							<form:input path="username" class="input-xlarge" name="name"
+							<form:input path="name" class="input-xlarge" name="name"
 								id="name"></form:input>
 						</div>
 					</div>
