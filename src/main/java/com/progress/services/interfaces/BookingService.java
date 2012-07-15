@@ -1,5 +1,6 @@
 package com.progress.services.interfaces;
 
+import java.util.Date;
 import java.util.List;
 
 import com.progress.jpa.Reservationdetails;
@@ -21,5 +22,7 @@ public interface BookingService {
 	public void addReservationDetail(Reservationdetails reservationdetails);
 	
 	public void cancelReservation(int conformationID);
+
+	List<Reservationdetails> getReservationDetails(Date date, int golfCourseID);
 
 }

@@ -1,6 +1,7 @@
 package com.progress.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Hibernate;
@@ -28,6 +29,7 @@ public class ReservationDetailsDaoImpl implements ReservationDetailsDao {
 
 	private String getAllQueryString = "from Reservationdetails";
 	private String getByConfirmationIDQueryString = "from Reservationdetails where confirmationNumber = ?";
+	private String queryString = "from Reservationdetails where date=? and golfcourse.golfCourseId=?";
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
@@ -120,5 +122,22 @@ public class ReservationDetailsDaoImpl implements ReservationDetailsDao {
 		} catch (HibernateException ex) {
 			System.err.println(ex);
 		}
+	}
+
+	@Override
+	public List<Reservationdetails> getReservationDetails(Date date, int golfCourseID) {
+		System.out.println("getReservationDetails");
+		List<Reservationdetails> reservationdetails = new ArrayList<Reservationdetails>();
+		try {
+			Session session = this.sessionFactory.getCurrentSession();
+			Query query = session.createQuery(queryString);
+			query.setString(0, date.getDate() + "-" + date.getMonth() + "-"
+					+ date.getYear());
+			query.setInteger(1, golfCourseID);
+			reservationdetails = query.list();
+		} catch (HibernateException ex) {
+			System.err.println(ex);
+		}
+		return reservationdetails;
 	}
 }

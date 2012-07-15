@@ -1,5 +1,6 @@
 package com.progress.dao.interfaces;
 
+import java.util.Date;
 import java.util.List;
 
 import com.progress.jpa.Reservationdetails;
@@ -17,6 +18,8 @@ public interface ReservationDetailsDao {
 
 	public Reservationdetails getReservationDetailsByConfirmationID(
 			int conformationID);
+	
+	public List<Reservationdetails> getReservationDetails(Date date, int golfCourseID);
 
 	public void addReservationDetail(Reservationdetails reservationdetails);
 

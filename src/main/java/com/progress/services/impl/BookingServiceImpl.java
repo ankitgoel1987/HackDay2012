@@ -1,5 +1,6 @@
 package com.progress.services.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,10 @@ public class BookingServiceImpl implements BookingService {
 	@Override
 	public void cancelReservation(int conformationID) {
 		reservationDetailsDao.cancelReservation(conformationID);
+	}
+	
+	@Override
+	public List<Reservationdetails> getReservationDetails(Date date, int golfCourseID) {
+		return reservationDetailsDao.getReservationDetails(date, golfCourseID);
 	}
 }

@@ -5,9 +5,7 @@ import java.security.Principal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -45,6 +43,18 @@ public class GolfCourseOwnerController {
 			}
 		}
 		return user;
+	}
+
+	@RequestMapping(value = "golfCourseMemberList", method = RequestMethod.GET)
+	public String showGolfCourseMemberList(ModelMap model, Principal principal) {
+		System.out.println("Account Settings Controller\n");
+		model.addAttribute("principal", principal);
+		Users user = getAuthenticatedUser(principal);
+		if (user == null) {
+			return "index";
+		}
+		model.addAttribute("user", user);
+		return "golfCourseMemberList";
 	}
 
 	// @RequestMapping(value = "accountsettings", method = RequestMethod.GET)
