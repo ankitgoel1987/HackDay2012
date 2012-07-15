@@ -105,7 +105,7 @@ public class SaasOwnerController {
 		user.setEnabled("true");
 		user.setPhoneNumber(phonenumber);
 		userService.addLogin(user);
-		ComposeMail composedMail = new ComposeMail(user.getName(), user.getEmail());
+		ComposeMail composedMail = new ComposeMail(user.getName(), user.getEmail(), user.getPhoneNumber());
 		// Call the mail service to shoot a mail
 		MailService mailService = new MailServiceImpl();
 		mailService.confirmRegistration(composedMail);

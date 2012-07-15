@@ -60,7 +60,7 @@ public class MailController {
 	public String confirmRegistration() {
 		System.out.println("Dummy Confirm Registration...");
 		// Create a dummy ComposeMail POJO
-		ComposeMail composedMail = new ComposeMail("Kiran", "kiranbabu.neela@gmail.com");
+		ComposeMail composedMail = new ComposeMail("Kiran", "kiranbabu.neela@gmail.com","9866354436");
 		// Call the mail service to shoot a mail
 		MailService mailService = new MailServiceImpl();
 		mailService.confirmRegistration(composedMail);
@@ -77,7 +77,7 @@ public class MailController {
 		System.out.println("Dummy Confirm Booking...");
 		// Create a dummy BookingBean POJO
 		Calendar instance = java.util.Calendar.getInstance(new Locale(System.getProperty("user.language")));
-		BookingBean bookingData = new BookingBean(instance, "Kiran", "kiranbabu.neela@gmail.com", "34557652535645");
+		BookingBean bookingData = new BookingBean(instance, "Kiran", "kiranbabu.neela@gmail.com","9866354436", "34557652535645");
 		// Call the mail service to shoot a mail
 		MailService mailService = new MailServiceImpl();
 		mailService.confirmBooking(bookingData);
@@ -94,7 +94,7 @@ public class MailController {
 		System.out.println("Dummy Send Reminder...");
 		// Create a dummy BookingBean POJO
 		Calendar instance = java.util.Calendar.getInstance(new Locale(System.getProperty("user.language")));
-		BookingBean bookingData = new BookingBean(instance, "Kiran", "kiranbabu.neela@gmail.com", "34557652535645");
+		BookingBean bookingData = new BookingBean(instance, "Kiran", "kiranbabu.neela@gmail.com", "9866354436", "34557652535645");
 		// Call the mail service to shoot a mail
 		MailService mailService = new MailServiceImpl();
 		mailService.scheduleReminderMail(bookingData);
