@@ -96,6 +96,8 @@ false, "", "facilityPageMenuName", "facilityPageText", "googleMapURL",
 false, "", "homePageMenuName", "homePageText", "name", "urlExtension");
 
 insert into reservationdetails values(1, NOW(), 5, true, 1, NOW(), 1, 3);
+insert into reservationdetails values(2, NOW(), 5, true, 1, NOW(), 1, 3);
+insert into reservationdetails values(3, NOW(), 5, true, 1, NOW(), 1, 3);
 
 insert into capacity values(1, 1, 15, "23:23:23");
 

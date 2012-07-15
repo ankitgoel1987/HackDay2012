@@ -5,8 +5,8 @@
 <div class="container">
 	<div>
 
-		<c:url var="searchURL" value="searchBooking" />
-		<c:url var="cancelBookingURL" value="cancelBooking" />
+		<c:url var="searchURL" value="searchMyBookings" />
+		<c:url var="cancelBookingURL" value="cancelMyBooking" />
 
 		<form:form commandName="searchBookings" method="POST"
 			action="${searchURL}" class="form-horizontal">
@@ -39,10 +39,10 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${reservationdetailsList.reservationdetails}" var="temp">
+					<c:forEach items="${reservationdetailsList.reservationDetails}"
+						var="temp">
 						<tr>
-						<td><input type="checkbox" name="optionsCheckboxList2"
-							value="option2"></td>
+							<td><input type="checkbox" id="${temp.confirmationNumber}" /></td>
 							<td><c:out value="${temp.confirmationNumber}" /></td>
 							<td><c:out value="${temp.bookingDateTime}" /></td>
 							<td><c:out value="${temp.teeDateTime}" /></td>

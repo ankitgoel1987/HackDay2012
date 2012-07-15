@@ -20,4 +20,6 @@ public interface ReservationDetailsDao {
 
 	public void addReservationDetail(Reservationdetails reservationdetails);
 
+	public void cancelReservation(int conformationID);
+
 }

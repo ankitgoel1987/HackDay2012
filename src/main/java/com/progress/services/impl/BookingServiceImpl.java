@@ -45,4 +45,9 @@ public class BookingServiceImpl implements BookingService {
 	public void addReservationDetail(Reservationdetails reservationdetails) {
 		reservationDetailsDao.addReservationDetail(reservationdetails);
 	}
+
+	@Override
+	public void cancelReservation(int conformationID) {
+		reservationDetailsDao.cancelReservation(conformationID);
+	}
 }

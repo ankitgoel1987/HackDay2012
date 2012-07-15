@@ -107,4 +107,18 @@ public class ReservationDetailsDaoImpl implements ReservationDetailsDao {
 		}
 
 	}
+
+	@Override
+	@Transactional
+	public void cancelReservation(int conformationID) {
+		System.out.println("cancelReservation");
+		try {
+			Session session = sessionFactory.getCurrentSession();
+			Reservationdetails reservationDetails = getReservationDetailsByConfirmationID(conformationID);
+			reservationDetails.setStatus(0);
+			session.saveOrUpdate(reservationDetails);
+		} catch (HibernateException ex) {
+			System.err.println(ex);
+		}
+	}
 }

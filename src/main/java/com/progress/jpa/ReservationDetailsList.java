@@ -4,15 +4,17 @@ import java.util.List;
 
 public class ReservationDetailsList {
 
-	private List<Reservationdetails> reservationdetails;
+	private List<Reservationdetails> reservationDetails;
 
-	public List<Reservationdetails> getReservationdetails() {
-		return reservationdetails;
+	public List<Reservationdetails> getReservationDetails() {
+		return reservationDetails;
 	}
 
-	public void setReservationdetails(
-			List<Reservationdetails> reservationdetails) {
-		this.reservationdetails = reservationdetails;
+	public void setReservationDetails(List<Reservationdetails> reservationDetails) {
+		this.reservationDetails = reservationDetails;
 	}
+
+
+
 
 }

@@ -3,7 +3,6 @@ package com.progress.services.interfaces;
 import java.util.List;
 
 import com.progress.jpa.Reservationdetails;
-import com.progress.jpa.Users;
 
 /**
  * 
@@ -20,5 +19,7 @@ public interface BookingService {
 			int conformationID);
 
 	public void addReservationDetail(Reservationdetails reservationdetails);
+	
+	public void cancelReservation(int conformationID);
 
 }

@@ -1,6 +1,7 @@
 package com.progress.web.controllers;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -46,9 +47,6 @@ public class GolfCourseMemberController {
 			authenticated = principal.isAuthenticated();
 			if (authenticated != false) {
 				user = (Users) principal.getPrincipal();
-				// List<GrantedAuthority> authorities =
-				// ((List<GrantedAuthority>) principal
-				// .getAuthorities());
 			}
 		}
 		return user;
@@ -66,21 +64,65 @@ public class GolfCourseMemberController {
 		List<Reservationdetails> reservationdetails = bookingServiceImpl
 				.getReservationDetailsByUserID(user.getUserId());
 		ReservationDetailsList reservationdetailsList = new ReservationDetailsList();
-		reservationdetailsList.setReservationdetails(reservationdetails);
+		reservationdetailsList.setReservationDetails(reservationdetails);
 		model.addAttribute("principal", principal);
 		model.addAttribute("reservationdetailsList", reservationdetailsList);
 		model.addAttribute("searchBookings", searchBookings);
 		return "mybookings";
 	}
 
-	@RequestMapping(value = "myBookings", method = RequestMethod.POST)
-	public String cancelMyBookings(ModelMap model, Principal principal) {
+	@RequestMapping(value = "cancelMyBooking", method = RequestMethod.POST)
+	public String cancelMyBookings(
+			@ModelAttribute("reservationdetailsList") ReservationDetailsList reservationdetailsList,
+			ModelMap model, Principal principal) {
 		System.out.println("GolfCourseMember Controller\n");
 		model.addAttribute("principal", principal);
 		Users user = getAuthenticatedUser(principal);
 		if (user == null) {
 			return "index";
 		}
+		// List<DeleteBooking> deleteBookingList = reservationdetailsList
+		// .getDeleteBookingList();
+		// for (Iterator iterator = deleteBookingList.iterator(); iterator
+		// .hasNext();) {
+		// DeleteBooking deleteBooking = (DeleteBooking) iterator.next();
+		// if (deleteBooking.isDeleteBooking()) {
+		// bookingServiceImpl.cancelReservation(deleteBooking
+		// .getReservationDetails().getConfirmationNumber());
+		// }
+		// }
+		// List<Reservationdetails> reservationdetails = bookingServiceImpl
+		// .cancelReservation(conformationID);
+		return "mybookings";
+	}
+
+	@RequestMapping(value = "searchMyBookings", method = RequestMethod.POST)
+	public String searchMyBookings(
+			@ModelAttribute("searchBookings") SearchBookings searchBookings,
+			ModelMap model, Principal principal) {
+		System.out.println("GolfCourseMember Controller\n");
+		model.addAttribute("principal", principal);
+		Users user = getAuthenticatedUser(principal);
+		if (user == null) {
+			return "index";
+		}
+		List<Reservationdetails> reservationdetails = new ArrayList<Reservationdetails>();
+		Integer searchID = 0;
+		try {
+			searchID = Integer.parseInt(searchBookings.getSearchText());
+			Reservationdetails t = bookingServiceImpl
+					.getReservationDetailsByConfirmationID(searchID);
+			if (t != null) {
+				reservationdetails.add(t);
+			}
+		} catch (Exception e) {
+
+		}
+		SearchBookings temp = new SearchBookings();
+		ReservationDetailsList reservationdetailsList = new ReservationDetailsList();
+		reservationdetailsList.setReservationDetails(reservationdetails);
+		model.addAttribute("reservationdetailsList", reservationdetailsList);
+		model.addAttribute("searchBookings", temp);
 		return "mybookings";
 	}
 
@@ -129,6 +171,6 @@ public class GolfCourseMemberController {
 		List<HourlyData> hourlyDataList = weatherServiceImpl
 				.getHourlyData(new Date(curryear, currmonth, currday));
 		model.addAttribute("hourlyDataList", hourlyDataList);
-		return "index";
+		return "booking";
 	}
 }
