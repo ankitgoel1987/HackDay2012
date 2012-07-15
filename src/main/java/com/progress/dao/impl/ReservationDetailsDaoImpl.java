@@ -43,7 +43,8 @@ public class ReservationDetailsDaoImpl implements ReservationDetailsDao {
 		try {
 			List<Reservationdetails> allReservationdetails = getAllReservationDetails();
 			for (Reservationdetails temp : allReservationdetails) {
-				if (temp.getUsers().getUserId() == userID) {
+				if (temp.getUsers().getUserId() == userID
+						&& temp.getStatus() == 1) {
 					filteredReservationdetails.add(temp);
 				}
 			}
@@ -57,21 +58,24 @@ public class ReservationDetailsDaoImpl implements ReservationDetailsDao {
 	@Transactional
 	public List<Reservationdetails> getAllReservationDetails() {
 		System.out.println("getAllReservationDetails\n");
-		List<Reservationdetails> reservationdetails = new ArrayList<Reservationdetails>();
+		List<Reservationdetails> result = new ArrayList<Reservationdetails>();
 		try {
 			Session session = this.sessionFactory.getCurrentSession();
 			Query query = session.createQuery(getAllQueryString);
-			reservationdetails = query.list();
-			if (reservationdetails != null && reservationdetails.size() != 0) {
-				for (Reservationdetails temp : reservationdetails) {
-					Hibernate.initialize(temp.getUsers());
-					Hibernate.initialize(temp.getGolfcourse());
+			List<Reservationdetails> list = query.list();
+			if (list != null && list.size() != 0) {
+				for (Reservationdetails temp : list) {
+					if (temp.getStatus() == 1) {
+						Hibernate.initialize(temp.getUsers());
+						Hibernate.initialize(temp.getGolfcourse());
+						result.add(temp);
+					}
 				}
 			}
 		} catch (HibernateException ex) {
 			System.err.println(ex);
 		}
-		return reservationdetails;
+		return result;
 	}
 
 	@Override
@@ -85,7 +89,8 @@ public class ReservationDetailsDaoImpl implements ReservationDetailsDao {
 			Query query = session.createQuery(getByConfirmationIDQueryString);
 			query.setInteger(0, conformationID);
 			List<Reservationdetails> reservationdetails = query.list();
-			if (reservationdetails != null && reservationdetails.size() != 0) {
+			if (reservationdetails != null && reservationdetails.size() != 0
+					&& reservationdetails.get(0).getStatus() == 1) {
 				reservationDetails = reservationdetails.get(0);
 				Hibernate.initialize(reservationDetails.getUsers());
 				Hibernate.initialize(reservationDetails.getGolfcourse());
@@ -103,6 +108,7 @@ public class ReservationDetailsDaoImpl implements ReservationDetailsDao {
 		System.out.println("addReservationDetail");
 		try {
 			Session session = sessionFactory.getCurrentSession();
+			reservationdetails.setStatus(1);
 			session.saveOrUpdate(reservationdetails);
 		} catch (HibernateException ex) {
 			System.err.println(ex);
@@ -125,19 +131,31 @@ public class ReservationDetailsDaoImpl implements ReservationDetailsDao {
 	}
 
 	@Override
-	public List<Reservationdetails> getReservationDetails(Date date, int golfCourseID) {
-		System.out.println("getReservationDetails");
-		List<Reservationdetails> reservationdetails = new ArrayList<Reservationdetails>();
+	public List<Reservationdetails> getReservationDetails(Date date,
+			int golfCourseID) {
+
+		System.out.println("getAllReservationDetails\n");
+		List<Reservationdetails> result = new ArrayList<Reservationdetails>();
 		try {
 			Session session = this.sessionFactory.getCurrentSession();
 			Query query = session.createQuery(queryString);
 			query.setString(0, date.getDate() + "-" + date.getMonth() + "-"
 					+ date.getYear());
 			query.setInteger(1, golfCourseID);
-			reservationdetails = query.list();
+			List<Reservationdetails> list = query.list();
+			if (result != null && result.size() != 0) {
+				for (Reservationdetails temp : list) {
+					if (temp.getStatus() == 1) {
+						Hibernate.initialize(temp.getUsers());
+						Hibernate.initialize(temp.getGolfcourse());
+						result.add(temp);
+					}
+				}
+			}
 		} catch (HibernateException ex) {
 			System.err.println(ex);
 		}
-		return reservationdetails;
+		return result;
+
 	}
 }

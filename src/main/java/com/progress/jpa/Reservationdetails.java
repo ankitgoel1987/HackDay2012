@@ -35,6 +35,7 @@ public class Reservationdetails implements java.io.Serializable {
 	private Integer status = 1;
 	private String timeRange;
 	private String date;
+	private Date teeDateTime;
 
 	public Reservationdetails() {
 	}
@@ -123,6 +124,16 @@ public class Reservationdetails implements java.io.Serializable {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "teeDateTime", length = 19)
+	public Date getTeeDateTime() {
+		return this.teeDateTime;
+	}
+
+	public void setTeeDateTime(Date teeDateTime) {
+		this.teeDateTime = teeDateTime;
 	}
 
 }

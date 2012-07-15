@@ -56,9 +56,9 @@ $('#reservationdetailsList :checkbox').click(function(event) {
     
 });
 
-$('#cancelMyBooking').click(function() {
+$('#sads').click(function() {
 	console.log(checkListArray.toString());
-	window.location(cancelMyBooking + '?ids');
+	window.location('cancelMyBooking');
 });
 
 

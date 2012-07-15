@@ -4,7 +4,10 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.progress.jpa.HourlyData;
 import com.progress.jpa.ReservationDetailsList;
@@ -72,27 +76,35 @@ public class GolfCourseMemberController {
 	}
 
 	@RequestMapping(value = "cancelMyBooking", method = RequestMethod.POST)
-	public String cancelMyBookings(
-			@ModelAttribute("reservationdetailsList") ReservationDetailsList reservationdetailsList,
-			ModelMap model, Principal principal) {
+	public String cancelMyBookings(HttpServletRequest request, ModelMap model,
+			Principal principal) {
+		// request.getAttribute("");
+		// System.out.println(ids);
+		// System.out.println(request.getAttribute("id"));
+		// System.out.println(request.getParameterNames()("1"));
+		// System.out.println(request.getParameter("3"));
+		// request.getParameter("3");
 		System.out.println("GolfCourseMember Controller\n");
 		model.addAttribute("principal", principal);
 		Users user = getAuthenticatedUser(principal);
 		if (user == null) {
 			return "index";
 		}
-		// List<DeleteBooking> deleteBookingList = reservationdetailsList
-		// .getDeleteBookingList();
-		// for (Iterator iterator = deleteBookingList.iterator(); iterator
-		// .hasNext();) {
-		// DeleteBooking deleteBooking = (DeleteBooking) iterator.next();
-		// if (deleteBooking.isDeleteBooking()) {
-		// bookingServiceImpl.cancelReservation(deleteBooking
-		// .getReservationDetails().getConfirmationNumber());
-		// }
-		// }
-		// List<Reservationdetails> reservationdetails = bookingServiceImpl
-		// .cancelReservation(conformationID);
+		Enumeration params = request.getParameterNames();
+		while (params.hasMoreElements()) {
+			String confirmationID = (String) params.nextElement();
+			int temp = Integer.parseInt(confirmationID);
+			bookingServiceImpl.cancelReservation(temp);
+
+		}
+		SearchBookings searchBookings = new SearchBookings();
+		List<Reservationdetails> reservationdetails = bookingServiceImpl
+				.getReservationDetailsByUserID(user.getUserId());
+		ReservationDetailsList reservationdetailsList = new ReservationDetailsList();
+		reservationdetailsList.setReservationDetails(reservationdetails);
+		model.addAttribute("principal", principal);
+		model.addAttribute("reservationdetailsList", reservationdetailsList);
+		model.addAttribute("searchBookings", searchBookings);
 		return "mybookings";
 	}
 

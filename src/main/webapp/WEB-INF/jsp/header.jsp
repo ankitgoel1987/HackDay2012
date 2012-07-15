@@ -142,7 +142,7 @@
 							<li class="divider-vertical"></li>
 							<li><a href="confirmReg">Confirm Registration</a></li>
 							<li><a href="confirmBooking">Confirm Booking</a></li>
-							<li><a href="sendReminder">Send Reminder</a></li>							
+							<li><a href="sendReminder">Send Reminder</a></li>
 
 						</ul>
 						<%
@@ -159,6 +159,12 @@
 									<li><a href="accountsettings">Account settings</a></li>
 									<li><a href="bookteetime">Book Tee Time</a></li>
 									<li><a href="myBookings">My Bookings</a></li>
+									<li class="divider"></li>
+									<li><a href="golfCourseMemberList">List og Golf Course
+											Members</a></li>
+									<li><a href="golfCourseList">List of Golf Courses</a></li>
+									<li class="divider"></li>
+									<li><a href="gcRegistration">GolfCourseRegistration</a></li>
 									<li class="divider"></li>
 									<li><a
 										href='<spring:url value="/j_spring_security_logout" htmlEscape="true" />'>Sign

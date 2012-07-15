@@ -24,8 +24,8 @@
 		</form:form>
 
 	</div>
-	<form:form commandName="reservationdetailsList" method="POST"
-		action="${cancelBookingURL}" class="form-horizontal">
+	<form class="form-horizontal"
+		action="${cancelBookingURL}" method="POST">
 		<div>
 			<table class="table table-striped table-bordered">
 				<thead>
@@ -42,7 +42,7 @@
 					<c:forEach items="${reservationdetailsList.reservationDetails}"
 						var="temp">
 						<tr>
-							<td><input type="checkbox" id="${temp.confirmationNumber}" /></td>
+							<td><input type="checkbox" id="${temp.confirmationNumber}" name="${temp.confirmationNumber}" /></td>
 							<td><c:out value="${temp.confirmationNumber}" /></td>
 							<td><c:out value="${temp.bookingDateTime}" /></td>
 							<td><c:out value="${temp.teeDateTime}" /></td>
@@ -53,7 +53,8 @@
 				</tbody>
 			</table>
 		</div>
-		<button type="submit" class="btn btn-danger">Cancel Booking</button>
-	</form:form>
+		<button type="submit" class="btn btn-danger" id="cancelMyBooking">Cancel
+			Booking</button>
+	</form>
 </div>
 <jsp:include page="footer.jsp" />
