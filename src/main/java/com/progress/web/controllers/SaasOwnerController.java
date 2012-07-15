@@ -6,12 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.progress.jpa.Golfcourse;
 import com.progress.jpa.Users;
 import com.progress.services.impl.BookingServiceImpl;
 import com.progress.services.impl.WeatherServiceImpl;
+import com.progress.services.interfaces.GcRegistrationService;
 import com.progress.services.interfaces.UserService;
 
 /**
@@ -28,6 +31,8 @@ public class SaasOwnerController {
 	private WeatherServiceImpl weatherServiceImpl;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private GcRegistrationService gcServiceImpl;
 
 	private Users getAuthenticatedUser(Principal temp) {
 		boolean authenticated = false;
@@ -55,6 +60,34 @@ public class SaasOwnerController {
 		}
 		model.addAttribute("user", user);
 		return "golfCourseList";
+	}
+	
+	@RequestMapping(value = "gcRegistration", method = RequestMethod.GET)
+	public String registerGolfCourse(ModelMap model, Principal principal) {
+		System.out.println("GolfCourseRegistration GET Controller\n");	
+		model.addAttribute("principal", principal);
+		Users user = getAuthenticatedUser(principal);
+		if (user == null) {
+			return "index";
+		}
+		
+		Golfcourse gc = new Golfcourse();
+		model.addAttribute("golfCourse", gc);
+		return "golfcourseregistration";
+	}
+	
+
+	@RequestMapping(value = "gcRegistration", method = RequestMethod.POST)
+	public String addGolfCourse(@ModelAttribute("golfCourse") Golfcourse gc,ModelMap model, Principal principal) {
+		System.out.println("GolfCourseRegistration POST Controller\n");
+		model.addAttribute("principal", principal);
+		Users user = getAuthenticatedUser(principal);
+		if (user == null) {
+			return "index";
+		}
+		gc.setUrlExtension(gc.getName());
+		gcServiceImpl.addGolfCourse(gc);
+		return "index";
 	}
 
 	// @RequestMapping(value = "accountsettings", method = RequestMethod.GET)
