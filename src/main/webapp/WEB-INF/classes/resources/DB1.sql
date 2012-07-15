@@ -22,25 +22,8 @@ CREATE TABLE users (
   authorityID int(11) DEFAULT NULL,
   golfCourseID int(11) DEFAULT NULL,
   PRIMARY KEY (userID),
-  UNIQUE KEY userID (userID),
-  KEY FK6A68E084653685C (golfCourseID),
-  KEY FK6A68E0812D06B18 (authorityID)
+  UNIQUE KEY userID (userID)
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-CREATE TABLE reservationdetails (
-  confirmationNumber int(11) NOT NULL AUTO_INCREMENT,
-  bookingDateTime datetime DEFAULT NULL,
-  noOfGolfers int(11) DEFAULT NULL,
-  reminderRequired tinyint(1) DEFAULT NULL,
-  status int(11) DEFAULT NULL,
-  teeDateTime datetime DEFAULT NULL,
-  golfCourseID int(11) DEFAULT NULL,
-  userID int(11) DEFAULT NULL,
-  PRIMARY KEY (confirmationNumber),
-  UNIQUE KEY confirmationNumber (confirmationNumber),
-  KEY FK869210F64653685C (golfCourseID),
-  KEY FK869210F6E0633F47 (userID)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE reservationdetails (
   confirmationNumber int(11) NOT NULL AUTO_INCREMENT,
@@ -54,11 +37,7 @@ CREATE TABLE reservationdetails (
   golfCourseID int(11) DEFAULT NULL,
   userID int(11) DEFAULT NULL,
   PRIMARY KEY (confirmationNumber),
-  UNIQUE KEY confirmationNumber (confirmationNumber),
-  KEY FK869210F64653685C (golfCourseID),
-  KEY FK869210F6E0633F47 (userID),
-  CONSTRAINT FK869210F6E0633F47 FOREIGN KEY (userID) REFERENCES users (userID),
-  CONSTRAINT FK869210F64653685C FOREIGN KEY (golfCourseID) REFERENCES golfcourse (golfCourseID)
+  UNIQUE KEY confirmationNumber (confirmationNumber)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE authorities (
@@ -72,7 +51,7 @@ CREATE TABLE capacity (
   capacityID int(11) NOT NULL,
   golfCourseID int(11) DEFAULT NULL,
   maxcount int(11) DEFAULT NULL,
-  teetime time DEFAULT NULL,
+  teetime varchar(50) DEFAULT NULL,
   PRIMARY KEY (capacityID),
   UNIQUE KEY capacityID (capacityID)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -110,12 +89,28 @@ insert into users values(4, 'dhoni@gmail.com', 'true', 'Mahinder Singh Dhoni', '
 insert into users values(5, 'dhoni@gmail.com', 'true', 'Mahinder Singh Dhoni', '78d7a82604de80d2b191e92a96d23a2803c0a0e910a32a6744e3ecd41e4da4cf', '+918978993113', 'member', 5, 1);
 
 
-insert into reservationdetails values(1, NOW(), "15-07-2012", 5, 1, 1, NOW(), "6:00 - 7:00", 1, 3);
-insert into reservationdetails values(2, NOW(), "16-07-2012", 5, 1, 1, NOW(), "8:00 - 9:00", 1, 3);
-insert into reservationdetails values(3, NOW(), "17-07-2012", 5, 1, 1, NOW(), "11:00 - 12:00", 1, 3);
+insert into reservationdetails values(1, NOW(), "16-7-2012", 5, 1, 1, NOW(), "6-7", 1, 3);
+insert into reservationdetails values(2, NOW(), "16-7-2012", 5, 1, 1, NOW(), "8-9", 1, 3);
+insert into reservationdetails values(3, NOW(), "16-7-2012", 10, 1, 1, NOW(), "11-12", 1, 3);
+insert into reservationdetails values(4, NOW(), "16-7-2012", 10, 1, 1, NOW(), "12-13", 1, 3);
+insert into reservationdetails values(5, NOW(), "16-7-2012", 15, 1, 1, NOW(), "14-15", 1, 3);
+insert into reservationdetails values(6, NOW(), "16-7-2012", 15, 1, 1, NOW(), "15-16", 1, 3);
 
 
-insert into capacity values(1, 1, 15, "23:23:23");
+insert into capacity values(1, 1, 15, "6-7");
+insert into capacity values(2, 1, 15, "7-8");
+insert into capacity values(3, 1, 15, "8-9");
+insert into capacity values(4, 1, 15, "9-10");
+insert into capacity values(5, 1, 15, "10-11");
+insert into capacity values(6, 1, 15, "11-12");
+insert into capacity values(7, 1, 15, "12-13");
+insert into capacity values(8, 1, 15, "13-14");
+insert into capacity values(9, 1, 15, "14-15");
+insert into capacity values(10, 1, 15, "15-16");
+insert into capacity values(11, 1, 15, "16-17");
+insert into capacity values(12, 1, 15, "17-18");
+
+
 
 
 ALTER TABLE reservationdetails 

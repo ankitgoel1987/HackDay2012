@@ -1,3 +1,29 @@
+$(document).ready(function() {
+
+	$('a[rel="tooltip"]').tooltip({
+		placement : 'top'
+	});
+
+	$('#datepicker').datepicker({
+
+		format : 'mm-dd-yyyy'
+
+	});
+
+	$('#datepicker-from').datepicker({
+
+		format : 'mm-dd-yyyy'
+
+	});
+
+	$('#datepicker-to').datepicker({
+
+		format : 'mm-dd-yyyy'
+
+	});
+
+});
+
 $('#nextBtn').click(function() {
 	$('#formOne').hide();
 	$('#formTwo').show();
@@ -29,36 +55,37 @@ $('#r4c3').hover(function() {
 });
 
 var checkListArray = new Array();
-$('#reservationdetailsList :checkbox').click(function(event) {
-    
-                var $this = $(this);
-    console.log($this);                       
-                var $thisNew = event.currentTarget;
-                var selectedId = $thisNew.id;
-                console.log(selectedId);
-                
-    if ($this.is(':checked')) {
-                console.log(checkListArray.length ==0 || (checkListArray.indexOf(selectedId)== -1) );
-                                if(checkListArray.length ==0 || checkListArray.indexOf(selectedId)== -1 ){
-                                console.log($thisNew.id);
-                                checkListArray.push(selectedId);
-                }
-                
-                }
-    
-    else {
-    
-                if(checkListArray.indexOf(selectedId)!= -1 ){
-                                console.log($thisNew.id);
-                                checkListArray.pop(selectedId);
-                }
-    }
-    
-});
+$('#reservationdetailsList :checkbox').click(
+		function(event) {
+
+			var $this = $(this);
+			console.log($this);
+			var $thisNew = event.currentTarget;
+			var selectedId = $thisNew.id;
+			console.log(selectedId);
+
+			if ($this.is(':checked')) {
+				console.log(checkListArray.length == 0
+						|| (checkListArray.indexOf(selectedId) == -1));
+				if (checkListArray.length == 0
+						|| checkListArray.indexOf(selectedId) == -1) {
+					console.log($thisNew.id);
+					checkListArray.push(selectedId);
+				}
+
+			}
+
+			else {
+
+				if (checkListArray.indexOf(selectedId) != -1) {
+					console.log($thisNew.id);
+					checkListArray.pop(selectedId);
+				}
+			}
+
+		});
 
 $('#sads').click(function() {
 	console.log(checkListArray.toString());
 	window.location('cancelMyBooking');
 });
-
-

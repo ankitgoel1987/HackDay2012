@@ -54,6 +54,8 @@
 <link href="<c:url value="/resources/css/modifiedBootstrap.css" />"
 	rel="stylesheet">
 <link href="<c:url value="/resources/css/app.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/datepicker.css" />"
+	rel="stylesheet">
 <script src="<c:url value="/resources/js/loadSocialSdk.js" />"></script>
 <link rel="shortcut icon"
 	href="<c:url value="/resources/img/icon.ico" />" />
@@ -226,24 +228,26 @@
 			</div>
 			<div class="modal-body">
 				<div id="formOne">
+
+
 					<iframe
 						src="https://www.facebook.com/plugins/registration?
              client_id=361202527286458&
-             redirect_uri=http://localhost:8080/BootstrapSampleProject/sample.jsp&
-             fields=name,birthday,gender,location,email,password"
-						scrolling="auto" frameborder="no" style="border: none"
-						allowTransparency="true" width="100%" height="330"> </iframe>
-				</div>
-
-				<div id="formTwo">
-					<p>Two fine body</p>
-				</div>
-
-				<div id="formThree">
-					<p>Three fine body</p>
+             redirect_uri=http://localhost:8080/solutions/fbRegister&
+             fields=[
+                { 'name':'name' },
+                { 'name':'birthday' },
+                { 'name':'gender' },
+                { 'name':'location' },
+                { 'name':'phone', 'description':'Phone Number', 'type':'text' },
+                { 'name':'email' },
+                { 'name':'password' },
+                ]"
+						scrolling="
+						auto" frameborder="no" style="border: none"
+						allowTransparency="true" width="100%" height="360px"> </iframe>
 				</div>
 
 			</div>
-
 		</div>
 	</div>
