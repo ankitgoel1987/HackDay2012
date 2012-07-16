@@ -89,3 +89,57 @@ $('#sads').click(function() {
 	console.log(checkListArray.toString());
 	window.location('cancelMyBooking');
 });
+
+
+//Populating content in booking form
+$('#6-7').click(function() {
+	var selected_date = $('#date-selector').attr('value');
+	$('#selected_date').attr('value', selected_date);
+	$('#selected_slot').attr('value', '6-7');
+});
+$('#7-8').click(function() {
+	var selected_date = $('#date-selector').attr('value');
+	$('#selected_date').attr('value', selected_date);
+	$('#selected_slot').attr('value', '7-8');
+});
+$('#8-9').click(function() {
+	var selected_date = $('#date-selector').attr('value');
+	$('#selected_date').attr('value', selected_date);
+	$('#selected_slot').attr('value', '8-9');
+});
+$('#9-10').click(function() {
+	var selected_date = $('#date-selector').attr('value');
+	$('#selected_date').attr('value', selected_date);
+	$('#selected_slot').attr('value', '9-10');
+});
+$('#10-11').click(function() {
+	var selected_date = $('#date-selector').attr('value');
+	$('#selected_date').attr('value', selected_date);
+	$('#selected_slot').attr('value', '10-11');
+});
+$('#11-12').click(function() {
+	var selected_date = $('#date-selector').attr('value');
+	$('#selected_date').attr('value', selected_date);
+	$('#selected_slot').attr('value', '11-12');
+});
+$('#12-13').click(function() {
+	var selected_date = $('#date-selector').attr('value');
+	$('#selected_date').attr('value', selected_date);
+	$('#selected_slot').attr('value', '12-13');
+});
+$('#13-14').click(function() {
+	var selected_date = $('#date-selector').attr('value');
+	$('#selected_date').attr('value', selected_date);
+	$('#selected_slot').attr('value', '13-14');
+});
+$('#15-16').click(function() {
+	var selected_date = $('#date-selector').attr('value');
+	$('#selected_date').attr('value', selected_date);
+	$('#selected_slot').attr('value', '15-16');
+});
+$('#17-18').click(function() {
+	var selected_date = $('#date-selector').attr('value');
+	$('#selected_date').attr('value', selected_date);
+	$('#selected_slot').attr('value', '17-18');
+});
+

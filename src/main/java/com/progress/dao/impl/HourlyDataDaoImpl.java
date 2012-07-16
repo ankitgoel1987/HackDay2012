@@ -40,7 +40,7 @@ public class HourlyDataDaoImpl implements HourlyDataDao {
 		try {
 			Session session = this.sessionFactory.getCurrentSession();
 			Query query = session.createQuery(getHourlyDataByDateQueryString);
-			query.setString(0, date.getDate() + "-" + date.getMonth() + "-"
+			query.setString(0, date.getDate() + "-" + (date.getMonth()) + "-"
 					+ date.getYear());
 			hourlyDataList = query.list();
 		} catch (HibernateException ex) {

@@ -15,15 +15,17 @@ public class BookingBean {
 	private String userName;
 	private String confirmID = "32423423423";
 	private String toemailAdd;
+	private String mobileNo;
 
 	public BookingBean() {
 	}
 
 	// Minimal Data
-	public BookingBean(Calendar bkData, String name, String toEmailAdd, String confirmationID) {
+	public BookingBean(Calendar bkData, String name, String toEmailAdd, String mobileNo, String confirmationID) {
 		this.bookingStartDate = bkData;
 		this.userName = name;
 		this.toemailAdd = toEmailAdd;
+		this.mobileNo = mobileNo;
 		this.confirmID = confirmationID;
 	}
 
@@ -82,4 +84,13 @@ public class BookingBean {
 		msgBuilder.append("<br><br>-GolfCourse Facilities Team</p>");
 		return msgBuilder.toString();
 	}
+
+	public String getMobileNo() {
+		return mobileNo;
+	}
+
+	public void setMobileNo(String mobileNo) {
+		this.mobileNo = mobileNo;
+	}
+	
 }

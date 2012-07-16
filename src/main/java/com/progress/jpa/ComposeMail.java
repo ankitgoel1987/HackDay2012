@@ -16,14 +16,16 @@ public class ComposeMail {
 	private String subject;
 	private String body;
 	private String userName;
+	private String mobileNo;
 
 	public ComposeMail() {
 	}
 
 	// Minimal
-	public ComposeMail(String userName, String toEmail) {
+	public ComposeMail(String userName, String toEmail, String mobileNo) {
 		this.userName = userName;
 		this.to = toEmail;
+		this.mobileNo = mobileNo;
 	}
 
 	public ComposeMail(String from, String to, String subject, String body) {
@@ -81,6 +83,14 @@ public class ComposeMail {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public String getMobileNo() {
+		return mobileNo;
+	}
+
+	public void setMobileNo(String mobileNo) {
+		this.mobileNo = mobileNo;
 	}
 
 }

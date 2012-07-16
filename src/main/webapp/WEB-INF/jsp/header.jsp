@@ -141,11 +141,6 @@
 							<li><a href="#">Services</a></li>
 							<li><a href="gallery">Gallery</a></li>
 							<li><a href="#">About Us</a></li>
-							<li class="divider-vertical"></li>
-							<li><a href="confirmReg">Confirm Registration</a></li>
-							<li><a href="confirmBooking">Confirm Booking</a></li>
-							<li><a href="sendReminder">Send Reminder</a></li>
-
 						</ul>
 						<%
 							if (authenticated) {

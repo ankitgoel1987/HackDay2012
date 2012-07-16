@@ -73,5 +73,6 @@
 <script src="<c:url value="/resources/js/bootstrap.js" />"></script>
 <script src="<c:url value="/resources/js/sample.js" />"></script>
 <script src="<c:url value="/resources/js/map.js" />"></script>
+<script src="<c:url value="/resources/js/bootstrap-datepicker.js" />"></script>
 </body>
 </html>

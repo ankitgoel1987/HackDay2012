@@ -29,7 +29,7 @@ public class ReservationDetailsDaoImpl implements ReservationDetailsDao {
 
 	private String getAllQueryString = "from Reservationdetails";
 	private String getByConfirmationIDQueryString = "from Reservationdetails where confirmationNumber = ?";
-	private String queryString = "from Reservationdetails where date=? and golfcourse.golfCourseId=?";
+	private String queryString = "from Reservationdetails where date=? and golfCourseID=?";
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
@@ -131,6 +131,7 @@ public class ReservationDetailsDaoImpl implements ReservationDetailsDao {
 	}
 
 	@Override
+	@Transactional
 	public List<Reservationdetails> getReservationDetails(Date date,
 			int golfCourseID) {
 
@@ -143,7 +144,7 @@ public class ReservationDetailsDaoImpl implements ReservationDetailsDao {
 					+ date.getYear());
 			query.setInteger(1, golfCourseID);
 			List<Reservationdetails> list = query.list();
-			if (result != null && result.size() != 0) {
+			if (list != null && list.size() != 0) {
 				for (Reservationdetails temp : list) {
 					if (temp.getStatus() == 1) {
 						Hibernate.initialize(temp.getUsers());

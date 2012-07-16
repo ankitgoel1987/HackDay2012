@@ -23,5 +23,6 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jackson-databind-2.0.4.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/signpost-commonshttp4-1.2.1.1.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/signpost-core-1.2.1.1.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/org.apache.felix.webconsole-1.0.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
