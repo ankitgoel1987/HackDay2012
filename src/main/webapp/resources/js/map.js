@@ -37,7 +37,7 @@ function initialize_map() {
 					myOptions);
 			map.setCenter(currentLatLng);
 //			console.log(currentLatLng);
-//			showMarker(currentLatLng);
+			showMarker(currentLatLng);
 //		});
 //	}
 }

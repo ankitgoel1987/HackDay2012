@@ -13,8 +13,7 @@
 			<!-- Services link -->
 			<li><a href="#">Services</a></li>
 			<li><a href="gallery">Gallery</a></li>
-			<!-- About us link -->
-			<li><a href="#">About us</a></li>
+
 		</ul>
 
 

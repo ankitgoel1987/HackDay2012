@@ -6,17 +6,21 @@
 
 <!-- Map -->
 <style type="text/css">
+html {
+	height: 100%
+}
 
-      html { height: 100% }
+body {
+	height: 100%;
+	margin: 2px;
+	padding: 2px
+}
 
-      body { height: 100%; margin: 2px; padding: 2px }
+#map_canvas {
+	height: 30%
+}
+</style>
 
-      #map_canvas { height: 30% }
 
-    </style>
-
-
-<div class="container well" id="map_canvas">
-
-</div>
+<div class="container" id="map_canvas" style="margin-bottom: 3%;"></div>
 <jsp:include page="footer.jsp" />

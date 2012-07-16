@@ -12,6 +12,17 @@
 <html>
 <head>
 <script>
+
+function showMarker(currentLatLng) {
+
+		var marker = new google.maps.Marker({
+			position : currentLatLng,
+			animation : google.maps.Animation.DROP,
+			map : map,
+			title : "Happy Golf Club"
+		});
+}
+
 	function initialize_map() {
 		// Check for geo-location support
 		//	if (navigator.geolocation) {
@@ -40,7 +51,7 @@
 				myOptions);
 		map.setCenter(currentLatLng);
 		//			console.log(currentLatLng);
-		//			showMarker(currentLatLng);
+					showMarker(currentLatLng);
 		//		});
 		//	}
 	}
@@ -110,12 +121,12 @@
 				<div>
 					<div class="pull-left" style="width: 40%">
 						<a href="https://twitter.com/share" class="twitter-share-button"
-							data-url="http://progress_ankit.cloudfoundry.com/home">Tweet</a>
+							data-url="http://sweetpoison.cloudfoundry.com/home">Tweet</a>
 
 					</div>
 
 					<div style="width: 45%" class="fb-like fb-Button pull-right"
-						data-href="http://localhost:8080/BootstrapSampleProject/learningBootstrap.jsp"
+						data-href="http://sweetpoison.cloudfoundry.com/"
 						data-send="false" data-layout="button_count" data-width="20"
 						data-show-faces="false" data-action="Like" data-font="segoe ui"></div>
 				</div>
@@ -222,7 +233,7 @@
 					<iframe
 						src="https://www.facebook.com/plugins/registration?
              client_id=361202527286458&
-             redirect_uri=http://localhost:8080/solutions/registerNewUser&
+             redirect_uri=http://sweetpoison.cloudfoundry.com/solutions/registerNewUser&
              fields=[
                 { 'name':'name' },
                 { 'name':'birthday' },

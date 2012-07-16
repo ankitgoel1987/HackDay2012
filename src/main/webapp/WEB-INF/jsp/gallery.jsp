@@ -59,7 +59,7 @@
 				rel="tooltip" title="Post on Facebook wall"><i class="icon-edit"></i></a>
 			<a href="https://twitter.com/share"
 				class="twitter-share-button pull-right"
-				data-url="http://localhost:8080/solutions/resources/img/260x180/img1.jpg">Tweet</a>
+				data-url="http://sweetpoison.cloudfoundry.com/solutions/resources/img/260x180/img1.jpg">Tweet</a>
 			</p>
 		</div>
 	</div>
@@ -75,7 +75,7 @@
 				rel="tooltip" title="Post on Facebook wall"><i class="icon-edit"></i></a>
 			<a href="https://twitter.com/share"
 				class="twitter-share-button pull-right"
-				data-url="http://localhost:8080/solutions/resources/img/260x180/img2.jpg">Tweet</a>
+				data-url="http://sweetpoison.cloudfoundry.com/solutions/resources/img/260x180/img2.jpg">Tweet</a>
 			</p>
 		</div>
 	</div>
@@ -91,7 +91,7 @@
 				rel="tooltip" title="Post on Facebook wall"><i class="icon-edit"></i></a>
 			<a href="https://twitter.com/share"
 				class="twitter-share-button pull-right"
-				data-url="http://localhost:8080/solutions/resources/img/260x180/img3.jpg">Tweet</a>
+				data-url="http://sweetpoison.cloudfoundry.com/solutions/resources/img/260x180/img3.jpg">Tweet</a>
 			</p>
 		</div>
 	</div>
@@ -106,7 +106,7 @@
 				rel="tooltip" title="Post on Facebook wall"><i class="icon-edit"></i></a>
 			<a href="https://twitter.com/share"
 				class="twitter-share-button pull-right"
-				data-url="http://localhost:8080/solutions/resources/img/260x180/img4.jpg">Tweet</a>
+				data-url="http://sweetpoison.cloudfoundry.com">Tweet</a>
 			</p>
 		</div>
 	</div>
@@ -121,7 +121,7 @@
 				rel="tooltip" title="Post on Facebook wall"><i class="icon-edit"></i></a>
 			<a href="https://twitter.com/share"
 				class="twitter-share-button pull-right"
-				data-url="http://localhost:8080/solutions/resources/img/260x180/img5.jpg">Tweet</a>
+				data-url="http://sweetpoison.cloudfoundry.com">Tweet</a>
 			</p>
 		</div>
 	</div>
