@@ -8,7 +8,7 @@ CREATE TABLE hourlydata (
   timeRange varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (hourlyDataID),
   UNIQUE KEY hourlyDataID (hourlyDataID)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE users (
@@ -23,7 +23,7 @@ CREATE TABLE users (
   golfCourseID int(11) DEFAULT NULL,
   PRIMARY KEY (userID),
   UNIQUE KEY userID (userID)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE reservationdetails (
   confirmationNumber int(11) NOT NULL AUTO_INCREMENT,
@@ -35,26 +35,26 @@ CREATE TABLE reservationdetails (
   teeDateTime datetime DEFAULT NULL,
   timeRange varchar(50) DEFAULT NULL,
   golfCourseID int(11) DEFAULT NULL,
-  userID int(11) DEFAULT NULL,
+  userID int(11),
   PRIMARY KEY (confirmationNumber),
   UNIQUE KEY confirmationNumber (confirmationNumber)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE authorities (
   authorityID int(11) NOT NULL AUTO_INCREMENT,
   authority varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (authorityID),
   UNIQUE KEY authorityID (authorityID)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE capacity (
   capacityID int(11) NOT NULL,
-  golfCourseID int(11) DEFAULT NULL,
+  golfCourseID int(11),
   maxcount int(11) DEFAULT NULL,
   teetime varchar(50) DEFAULT NULL,
   PRIMARY KEY (capacityID),
   UNIQUE KEY capacityID (capacityID)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE golfcourse (
   golfCourseID int(11) NOT NULL AUTO_INCREMENT,
@@ -71,7 +71,7 @@ CREATE TABLE golfcourse (
   urlExtension varchar(50) DEFAULT NULL,
   PRIMARY KEY (golfCourseID),
   UNIQUE KEY golfCourseID (golfCourseID)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 insert into authorities values(1, 'ROLE_SAASOWNER');
 insert into authorities values(2, 'ROLE_GOLFCLUBOWNER');
@@ -122,7 +122,7 @@ ADD CONSTRAINT FOREIGN KEY (golfcourseID) REFERENCES golfcourse(golfcourseID) ON
 CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE capacity 
-ADD CONSTRAINT FOREIGN KEY (capacityID) REFERENCES golfcourse(golfcourseID) ON DELETE
+ADD CONSTRAINT FOREIGN KEY (golfCourseID) REFERENCES golfcourse(golfcourseID) ON DELETE
 CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE users
