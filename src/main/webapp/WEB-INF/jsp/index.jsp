@@ -1,101 +1,80 @@
 <jsp:include page="header.jsp" />
-<!-- Photo slide show -->
 
-<div id="myCarousel" class="carousel slide container">
-	<div class="carousel-inner">
-		<div class="item">
-			<img src="./image/glyphicons-halflings.png" alt="iamge 1">
-			<div class="carousel-caption">
-				<h4>First Thumbnail label</h4>
-				<p>Image 1.</p>
-			</div>
-		</div>
-		<div class="item">
-			<img src="./image/glyphicons-halflings-white.png" alt="image 2">
-			<div class="carousel-caption">
-				<h4>Second Thumbnail label</h4>
-				<p>Image 2.</p>
-			</div>
-		</div>
-		<div class="item active">
-			<img src="./image/top_backgroundImage_1.jpg" alt="image 3">
-			<div class="carousel-caption">
-				<h4>Third Thumbnail label</h4>
-				<p>Image 3.</p>
-			</div>
-		</div>
-	</div>
-	<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-	<a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
-</div>
-
-<div class="container">
+<div class="container" style="background-color: #f5f5f5;">
 
 	<div class="hero-unit pull-left-intro">
-		<p>Introduction of golf course</p>
+		<h2>Welcome to Golf Club!</h2>
+		<p>Boulder Hills Golf and Country Club is a world-class leisure
+			and residential community spread out over 510.42 approximate acres.
+			It has been envisioned as a complete, self-contained township spread
+			around an 18-hole championship golf course where every home is
+			designed to the most demanding international standards.</p>
 
 	</div>
+	<!-- Photo slide show -->
 
-	<div class="accordion pull-right-events" id="accordion2">
-		<strong>Latest News & Events</strong>
-		<div class="accordion-group">
-			<div class="accordion-heading">
-				<a class="accordion-toggle" data-toggle="collapse"
-					data-parent="#accordion2" href="#collapseOne"> Collapsible
-					Group Item #1 </a>
+	<div id="myCarousel" class="carousel slide pull-right-events">
+		<div class="carousel-inner">
+			<div class="item active">
+				<img src="resources/img/homePageImg/hImg.jpg" alt="iamge 1">
+				<div class="carousel-caption">
+					<h4>Lake side view</h4>
+				</div>
 			</div>
-			<div id="collapseOne" class="accordion-body collapse in">
-				<div class="accordion-inner">Anim pariatur cliche
-					reprehenderit, enim eiusmod high life accusamus terry richardson ad
-					squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
-					brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
-					moon tempor, sunt aliqua put a bird on it squid single-origin
-					coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
-					helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-					proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
-					craft beer farm-to-table, raw denim aesthetic synth nesciunt you
-					probably haven't heard of them accusamus labore sustainable VHS.</div>
+			<div class="item">
+				<img src="resources/img/homePageImg/hImg2.jpg" alt="image 2">
+				<div class="carousel-caption">
+					<h4>Family fun place</h4>
+				</div>
 			</div>
-		</div>
-		<div class="accordion-group">
-			<div class="accordion-heading">
-				<a class="accordion-toggle" data-toggle="collapse"
-					data-parent="#accordion2" href="#collapseTwo"> Collapsible
-					Group Item #2 </a>
+			<div class="item ">
+				<img src="resources/img/homePageImg/hImg3.jpg" alt="image 3">
+				<div class="carousel-caption">
+					<h4>Hill side view</h4>
+				</div>
 			</div>
-			<div id="collapseTwo" class="accordion-body collapse">
-				<div class="accordion-inner">Anim pariatur cliche
-					reprehenderit, enim eiusmod high life accusamus terry richardson ad
-					squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
-					brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
-					moon tempor, sunt aliqua put a bird on it squid single-origin
-					coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
-					helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-					proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
-					craft beer farm-to-table, raw denim aesthetic synth nesciunt you
-					probably haven't heard of them accusamus labore sustainable VHS.</div>
+			<div class="item">
+				<img src="resources/img/homePageImg/hImg4.jpg" alt="image 4">
+				<div class="carousel-caption">
+					<h4>Golf course resort</h4>
+				</div>
 			</div>
-		</div>
-		<div class="accordion-group">
-			<div class="accordion-heading">
-				<a class="accordion-toggle" data-toggle="collapse"
-					data-parent="#accordion2" href="#collapseThree"> Collapsible
-					Group Item #3 </a>
+			<div class="item">
+				<img src="resources/img/homePageImg/hImg5.jpg" alt="image 5">
+				<div class="carousel-caption">
+					<h4>Beautiful view</h4>
+				</div>
 			</div>
-			<div id="collapseThree" class="accordion-body collapse">
-				<div class="accordion-inner">Anim pariatur cliche
-					reprehenderit, enim eiusmod high life accusamus terry richardson ad
-					squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
-					brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
-					moon tempor, sunt aliqua put a bird on it squid single-origin
-					coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
-					helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-					proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
-					craft beer farm-to-table, raw denim aesthetic synth nesciunt you
-					probably haven't heard of them accusamus labore sustainable VHS.</div>
+			<div class="item">
+				<img src="resources/img/homePageImg/hImg6.jpg" alt="image 6">
+				<div class="carousel-caption">
+					<h4>Third Thumbnail label</h4>
+				</div>
 			</div>
 		</div>
+		<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+		<a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
 	</div>
+
 </div>
+<div class="container" >
+	<div class="hero-unit well">
+		<p>There's nothing more elegant to watch in the world of sport
+			than a great game of golf. For many aficionados, this is not a
+			leisurely pursuit but a higher calling; a lifelong obsession chasing
+			perfection. Golf courses around the world reflect this passion for
+			the game. The best among them combine natural beauty with a crafty
+			layout, creating a magnificent atmosphere. Boulder Hills in Hyderabad
+			is one such world-class golf course. Designed by Peter Harradine,
+			this 18-hole championship course is a joint project by Emaar
+			Properties, MGF and Andhra Pradesh Infrastructure Corporation.
 
+			Indeed, Boulders Hills is a lot more than a great golf course. It
+			boasts of some of the finest venues as well. whether you are
+			celebrating a grand wedding or a private get-together, there's no
+			better place to play host.</p>
+
+	</div>
+
+</div>
 <jsp:include page="footer.jsp" />

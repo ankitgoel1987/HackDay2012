@@ -3,95 +3,80 @@ function logResponse(response) {
 		console.log('The response was', response);
 	}
 }
+var application_key = '361202527286458';
 
-function load_FB_sdk(app_id) {
-	window.fbAsyncInit = function() {
-		FB.init({
-			appId : app_id, // App ID
-			channelUrl : './channel.html', // Channel File
-			status : true, // check login status
-			cookie : true, // enable cookies to allow the server to access the
-			// session
-			xfbml : true
-		});
+$('.shareFB').click(function() {
+	console.log("Sharing on FB");
+	checkLogin(application_key, 'shareFB');
 
-		// Additional initialization code here
-		initialize_fb(app_id);
-	};
+});
+
+function postOnWall() {
+	var imageURl = 'http://t.co/ZgSyVxAM';
+	FB
+			.ui(
+					{
+						method : 'feed',
+						link : imageURl,
+						picture : imageURl,
+						description : 'Boulder Hills is blessed by Mother Nature. Huge rocks and majestic boulders provide natural coulisses, back drops and hazards. The course meanders through spectacular scenery. Ten of the eighteen holes have elevated tees and the Par threes are designed in such a way that players see all of the hole in front of them. Large expanse of greens maximise pin positions and add visual appeal. Truly wow-class. Truly inspiring. ',
+						caption : 'Golf club'
+					}, function(response) {
+						// If response is null the user canceled the dialog
+						if (response != null) {
+							logResponse(response);
+						}
+					});
 }
-// Load the SDK Asynchronously
-(function(d) {
-	var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-	if (d.getElementById(id)) {
-		return;
-	}
-	js = d.createElement('script');
-	js.id = id;
-	js.async = true;
-	js.src = "//connect.facebook.net/en_US/all.js";
-	ref.parentNode.insertBefore(js, ref);
-}(document));
 
-function initialize_fb(app_id) {
-	$(function() {
-		// Set up so we handle click on the buttons
+$('.postFB').click(function() {
+	console.log("Sharing on FB");
+	checkLogin(application_key, 'postFB');
+});
 
-		$('#getLoginStatus')
-				.click(
-						function() {
-							FB
-									.getLoginStatus(function(response) {
-										if (response.status === 'connected') {
-											console.log(response);
-										} else {
-											console.log("Not Connected");
-											FB
-													.ui(
-															{
-																method : 'oauth',
-																client_id : app_id,
-																redirect_uri : 'http://localhost:8080/BootstrapSampleProject/FacebookFlow.jsp',
-																scope : 'publish_stream',
-															},
-															function(response) {
+function checkLogin(app_key, action) {
+	FB
+			.getLoginStatus(function(response) {
+				if (response.status === 'connected') {
+					console.log(response);
+					if (action == 'shareFB') {
 
-																if (response != null) {
-																	logResponse(response);
-//																	window.opener.location.href = 'http://localhost:8080/BootstrapSampleProject/FacebookFlow.jsp';
-																	//Close the window and reload the home page
-																}
-															});
+						postPicOnFB();
+					} else if (action == 'postFB') {
+						postOnWall();
+					}
+				} else {
+					console.log("Not Connected");
+					FB
+							.ui(
+									{
+										method : 'oauth',
+										client_id : app_key,
+										redirect_uri : 'http://progress_ankit.cloudfoundry.com/gallery',
+										scope : 'publish_stream',
+									}, function(response) {
+
+										if (response != null) {
+											logResponse(response);
 										}
 									});
-						});
-
-		$('#postToWall').click(function() {
-			FB.ui({
-				method : 'feed',
-				link : 'http://www.google.com/'
-			}, function(response) {
-				// If response is null the user canceled the dialog
-				if (response != null) {
-					logResponse(response);
 				}
 			});
-		});
+}
 
-		$('#postPictureOnWall').click(function() {
-			var imgURL = "http://www.sfwgc.org/MP900402495[1].jpg";
-			logResponse('invoked');
-			FB.api('/me/photos', 'post', {
-				message : 'photo description',
-				url : imgURL
-			}, function(response) {
+function postPicOnFB() {
+	var imgURL = "http://www.sfwgc.org/MP900402495[1].jpg";
+	logResponse('invoked');
+	FB.api('/me/photos', 'post', {
+		message : 'photo description',
+		url : imgURL
+	}, function(response) {
 
-				if (!response || response.error) {
-					logResponse('Error occured');
-				} else {
-					logResponse('Post ID: ' + response.id);
-				}
+		if (!response || response.error) {
+			logResponse('Error occured');
+		} else {
+			logResponse('Post ID: ' + response.id);
+		}
 
-			});
-		});
 	});
 }

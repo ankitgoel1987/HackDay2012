@@ -91,40 +91,36 @@
 		}
 	%>
 	<div class="container">
-		<div class="container container-top">
+		<!-- Top container -->
+		<div class="container"
+			style="height: 106px; background-color: #f5f5f5;">
 			<!-- Banner -->
-			<div class="row show-grid">
-				<!-- Banner Image  -->
-				<div class="span10">
-					<img class="banner-image" alt="banner image"
-						src="<c:url value="/resources/img/top_backgroundImage_1.jpg"/>" />
-				</div>
-				<!-- Social Integration -->
-				<div class="banner-top-right span2 offset10">
-					<div>
-						<address>
-							<strong>Golf Club</strong><br> 795 Folsom Ave, Suite 600<br>
-						</address>
-						<div>
-							<div class="pull-left" style="width: 40%">
-								<a href="https://twitter.com/share" class="twitter-share-button"
-									data-url="http://localhost:8080/BootstrapSampleProject/learningBootstrap.jsp">Tweet</a>
-								<script>
-									
-								</script>
-							</div>
+			<!-- Banner Image  -->
 
-							<div style="width: 45%" class="fb-like fb-Button pull-right"
-								data-href="http://localhost:8080/BootstrapSampleProject/learningBootstrap.jsp"
-								data-send="false" data-layout="button_count" data-width="20"
-								data-show-faces="false" data-action="Like" data-font="segoe ui"></div>
-						</div>
+			<img class="banner-image" alt="banner image"
+				style="height: 106px; width: 77%"
+				src="<c:url value="/resources/img/top_backgroundImage_1.jpg" />
+			" />
+
+			<!-- Social Integration -->
+			<div class="banner-top-right" style="height: 80px; width: 20%;">
+				<address>
+					<strong>Golf Club</strong><br> Manikonda Village, Gachibowli<br>
+				</address>
+				<div>
+					<div class="pull-left" style="width: 40%">
+						<a href="https://twitter.com/share" class="twitter-share-button"
+							data-url="http://progress_ankit.cloudfoundry.com/home">Tweet</a>
+
 					</div>
 
-
+					<div style="width: 45%" class="fb-like fb-Button pull-right"
+						data-href="http://localhost:8080/BootstrapSampleProject/learningBootstrap.jsp"
+						data-send="false" data-layout="button_count" data-width="20"
+						data-show-faces="false" data-action="Like" data-font="segoe ui"></div>
 				</div>
-
 			</div>
+
 		</div>
 		<!-- Navigation bar -->
 		<div class="container">
@@ -132,15 +128,14 @@
 				<div class="navbar-inner">
 					<div class="container">
 						<ul class="nav">
-							<a class="brand" href="home">Happy Golf Club </a>
+							<a class="brand" href="home">Golf Club </a>
 							<li class="divider-vertical"></li>
 							<li class="active"><a href="home">Home</a></li>
 							<li class="divider-vertical"></li>
 							<li><a href="location">Explore</a></li>
 							<li class="divider-vertical"></li>
-							<li><a href="#">Services</a></li>
 							<li><a href="gallery">Gallery</a></li>
-							<li><a href="#">About Us</a></li>
+
 						</ul>
 						<%
 							if (authenticated) {
@@ -182,8 +177,9 @@
 								<ul class="dropdown-menu">
 									<li>
 
-										<form class="well form-vertical"
-											action="j_spring_security_check" method="POST">
+										<form id="login_form" class="form-vertical"
+											action="j_spring_security_check" method="POST"
+											style="margin: 15px;">
 											<fieldset>
 												<div class="control-group">
 													<label class="control-label" for="j_username">E-mail</label>
@@ -219,16 +215,14 @@
 		<div class="modal hide fade" id="myModal">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">x</button>
-				<h3>Modal header</h3>
+				<h3>Create account</h3>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body" style="height: 370px;">
 				<div id="formOne">
-
-
 					<iframe
 						src="https://www.facebook.com/plugins/registration?
              client_id=361202527286458&
-             redirect_uri=http://localhost:8080/solutions/fbRegister&
+             redirect_uri=http://localhost:8080/solutions/registerNewUser&
              fields=[
                 { 'name':'name' },
                 { 'name':'birthday' },
@@ -244,5 +238,6 @@
 				</div>
 
 			</div>
+
 		</div>
 	</div>

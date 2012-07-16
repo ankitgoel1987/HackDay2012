@@ -85,11 +85,6 @@ $('#reservationdetailsList :checkbox').click(
 
 		});
 
-$('#sads').click(function() {
-	console.log(checkListArray.toString());
-	window.location('cancelMyBooking');
-});
-
 
 //Populating content in booking form
 $('#6-7').click(function() {
